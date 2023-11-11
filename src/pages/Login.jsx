@@ -1,13 +1,39 @@
 import React from "react";
 import PageBanner from "../components/common/PageBanner";
 import { Link } from "react-router-dom";
+import { useUserLogInMutation } from "../redux/api/apiSlice";
+import Swal from "sweetalert2";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../redux/features/user/userSlice";
+import Cookies from "js-cookie";
 
 const Login = () => {
-  const handleLoginUser = (e) => {
+  const [userLogin, { error }] = useUserLogInMutation();
+  const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const handleLoginUser = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
-    console.log(email, password);
+    const data = { email, password };
+    const res = await userLogin({ data });
+    if (res?.data?.status === true) {
+      dispatch(setUser(data));
+      Cookies.set("access_token_web_tours", res?.data?.token);
+      Swal.fire({
+        icon: "success",
+        title: "Login Success!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      e.target.reset();
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Login failed",
+        text: `${res?.error?.data?.message}`,
+      });
+    }
   };
   return (
     <div>
