@@ -7,9 +7,17 @@ import {
   faUmbrellaBeach,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
+import { useGetAllCountryQuery } from "../redux/api/apiSlice";
+import Loader from "../components/global/Loader";
 
 const Home = () => {
+  const { data, isLoading } = useGetAllCountryQuery();
   const navigate = useNavigate();
+  console.log(data?.data);
+  if (isLoading) {
+    return <Loader />;
+  }
+  const countries = data?.data;
   const handleSearchClick = () => {
     navigate("/tours-list");
   };
@@ -52,11 +60,11 @@ const Home = () => {
                               <div className="input-box">
                                 <label className="white">Country</label>
                                 <select className="select-box ">
-                                  <option value="1">America</option>
-                                  <option value="2">England</option>
-                                  <option value="3">Switzerland</option>
-                                  <option value="4">Canada</option>
-                                  <option value="5">Denmark</option>
+                                  {countries?.map((country) => (
+                                    <option key={country.id} value={country.id}>
+                                      {country.name}
+                                    </option>
+                                  ))}
                                 </select>
                               </div>
                             </div>

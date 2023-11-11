@@ -5,7 +5,6 @@ import OurPartners from "../components/common/OurPartners";
 import TourDayCollapse from "../components/TourDayCollapse";
 import BlogCmntBox from "../components/BlogCmntBox";
 import MakeBookingCntn from "../components/MakeBookingCntn";
-import BackBtn from "../components/common/BackBtn";
 
 const TourDetails = () => {
   return (
