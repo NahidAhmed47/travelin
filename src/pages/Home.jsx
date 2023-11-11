@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faBriefcase,
@@ -7,19 +7,29 @@ import {
   faUmbrellaBeach,
 } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import { useGetAllCountryQuery } from "../redux/api/apiSlice";
+import {
+  useGetAllCountryQuery,
+  useGetCitiesByCountryQuery,
+} from "../redux/api/apiSlice";
 import Loader from "../components/global/Loader";
 
 const Home = () => {
+  const [selectedCountry, setSelectedCountry] = useState(null);
   const { data, isLoading } = useGetAllCountryQuery();
+  const { data: citiesData } = useGetCitiesByCountryQuery({
+    countryId: selectedCountry,
+  });
   const navigate = useNavigate();
-  console.log(data?.data);
   if (isLoading) {
     return <Loader />;
   }
-  const countries = data?.data;
+  const countries = data?.data || [];
+  const cities = citiesData?.data || [];
   const handleSearchClick = () => {
     navigate("/tours-list");
+  };
+  const handleSelectCountry = (e) => {
+    setSelectedCountry(e.target.value);
   };
   return (
     <div style={{ backgroundImage: "url(/images/bg/bg1.jpg)" }}>
@@ -59,10 +69,19 @@ const Home = () => {
                             <div className="form-group">
                               <div className="input-box">
                                 <label className="white">Country</label>
-                                <select className="select-box ">
+                                <select
+                                  className="select-box "
+                                  onChange={handleSelectCountry}
+                                >
+                                  <option value="" selected disabled>
+                                    Select Country
+                                  </option>
                                   {countries?.map((country) => (
-                                    <option key={country.id} value={country.id}>
-                                      {country.name}
+                                    <option
+                                      key={country?.id}
+                                      value={country?.id}
+                                    >
+                                      {country?.name}
                                     </option>
                                   ))}
                                 </select>
@@ -74,9 +93,14 @@ const Home = () => {
                               <div className="input-box">
                                 <label className="white">City</label>
                                 <select className="niceSelect">
-                                  <option value="1">London</option>
-                                  <option value="2">Manchester</option>
-                                  <option value="3">Taranto</option>
+                                  <option value="" selected disabled>
+                                    Select City
+                                  </option>
+                                  {cities?.map((city) => (
+                                    <option key={city?.id} value={city?.id}>
+                                      {city?.name}
+                                    </option>
+                                  ))}
                                 </select>
                               </div>
                             </div>

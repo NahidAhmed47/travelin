@@ -10,8 +10,11 @@ const api = createApi({
         getAllCountry: builder.query({
             query: () => '/api/countries/list'
         }),
+        getCitiesByCountry: builder.query({
+            query: ({countryId}) => `/api/cities/cities-by-country/${countryId}`
+        }),
     })
 })
 
-export const { useGetToursQuery, useGetAllCountryQuery } = api;
+export const { useGetToursQuery, useGetAllCountryQuery, useGetCitiesByCountryQuery } = api;
 export default api;
