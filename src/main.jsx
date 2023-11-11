@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
-import Router from "./providers/Router";
+import ReduxProvider from "./providers/ReduxProvider";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Router />
+    <ReduxProvider />
   </React.StrictMode>
 );
