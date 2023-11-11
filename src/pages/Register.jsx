@@ -2,10 +2,17 @@ import React, { useState } from "react";
 import PageBanner from "../components/common/PageBanner";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { useDispatch, useSelector } from "react-redux";
+import { useCreateUserMutation } from "../redux/api/apiSlice";
+import Cookies from "js-cookie";
+import { setUser } from "../redux/features/user/userSlice";
 
 const Register = () => {
   const [checkboxStatus, setCheckboxStatus] = useState(false);
-  const handleRegisterUser = (e) => {
+  const [createUser, { error }] = useCreateUserMutation();
+  const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const handleRegisterUser = async (e) => {
     e.preventDefault();
     const first_name = e.target.first_name.value;
     const last_name = e.target.last_name.value;
@@ -27,14 +34,33 @@ const Register = () => {
         title: "Please accept the Terms and Privacy Policy!",
       });
     }
-    const user = {
+    const data = {
       first_name,
       last_name,
       email,
       phone,
       password,
     };
-    console.log(user);
+    const res = await createUser({ data });
+    if (res?.data?.status === true) {
+      Cookies.set("access_token_web_tours", res?.data?.token);
+      dispatch(setUser(data));
+      Swal.fire({
+        icon: "success",
+        title: "Register Success!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      e.target.reset();
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Registration failed",
+        text: `${res?.error?.data?.message}`,
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
   };
   return (
     <div className="">
