@@ -56,7 +56,7 @@ const Footer = () => {
           <div className="row">
             <div className="col-lg-4 col-md-6 col-sm-12 mb-4 pe-4">
               <div className="footer-about">
-                <img src="/images/logo-white.png" alt="" />
+                <img src="/trslogo.png" alt="" style={{ width: "100px" }}/>
                 <p className="mt-3 mb-3 white">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio
                   suspendisse leo neque iaculis molestie sagittis maecenas
