@@ -3,16 +3,19 @@ import PageBanner from "../components/common/PageBanner";
 import { Link } from "react-router-dom";
 
 const Login = () => {
+  const handleLoginUser = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+    console.log(email, password);
+  };
   return (
     <div>
-      {/* <div id="preloader">
-        <div id="status"></div>
-      </div> */}
       <section
         className="breadcrumb-main pb-20 pt-14"
         style={{ backgroundImage: "url(/images/bg/bg1.jpg)" }}
       >
-        <PageBanner path={"Login"}/>
+        <PageBanner path={"Login"} />
       </section>
       {/* <!-- BreadCrumb Ends -->  */}
 
@@ -21,30 +24,34 @@ const Login = () => {
         <div className="container">
           <div className="log-main blog-full log-reg w-75 mx-auto">
             <div className="row">
-              <div className=" pe-4" style={{maxWidth: "600px", margin: "0px auto"}}>
+              <div
+                className=" pe-4"
+                style={{ maxWidth: "600px", margin: "0px auto" }}
+              >
                 <h3 className="text-center border-b pb-2">Login</h3>
                 <form
-                  method="post"
-                  action="#"
+                  onSubmit={handleLoginUser}
                   name="contactform"
                   id="contactform3"
                 >
                   <div className="form-group mb-2">
                     <input
-                      type="text"
-                      name="user_name"
+                      type="email"
+                      name="email"
                       className="form-control"
                       id="fullname"
-                      placeholder="User Name or Email Address"
+                      placeholder="Email Address"
+                      required
                     />
                   </div>
                   <div className="form-group mb-2">
                     <input
                       type="password"
-                      name="password_name"
+                      name="password"
                       className="form-control"
                       id="password"
                       placeholder="Password"
+                      required
                     />
                   </div>
                   <div className="form-group mb-2">
@@ -69,7 +76,7 @@ const Login = () => {
                       className="nir-btn"
                       id="submit1"
                       value="Login"
-                      style={{fontWeight: "600"}}
+                      style={{ fontWeight: "600" }}
                     />
                   </div>
                   <p className="text-center">
