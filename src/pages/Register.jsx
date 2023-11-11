@@ -1,13 +1,43 @@
-import React from "react";
+import React, { useState } from "react";
 import PageBanner from "../components/common/PageBanner";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const Register = () => {
+  const [checkboxStatus, setCheckboxStatus] = useState(false);
+  const handleRegisterUser = (e) => {
+    e.preventDefault();
+    const first_name = e.target.first_name.value;
+    const last_name = e.target.last_name.value;
+    const email = e.target.email.value;
+    const phone = e.target.phone.value;
+    const password = e.target.password.value;
+    const repassword = e.target.repassword.value;
+    // check password and repassword
+    if (password !== repassword) {
+      return Swal.fire({
+        icon: "error",
+        title: "Password not matched!",
+      });
+    }
+    // check checkbox
+    if (!checkboxStatus) {
+      return Swal.fire({
+        icon: "error",
+        title: "Please accept the Terms and Privacy Policy!",
+      });
+    }
+    const user = {
+      first_name,
+      last_name,
+      email,
+      phone,
+      password,
+    };
+    console.log(user);
+  };
   return (
     <div className="">
-      {/* <div id="preloader">
-        <div id="status"></div>
-      </div> */}
       <section
         className="breadcrumb-main pb-20 pt-14"
         style={{ backgroundImage: "url(/images/bg/bg1.jpg)" }}
@@ -25,50 +55,75 @@ const Register = () => {
                 <h3 className="text-center border-b pb-2">Register</h3>
 
                 <form
-                  method="post"
-                  action="#"
                   name="contactform2"
                   id="contactform2"
+                  onSubmit={handleRegisterUser}
                 >
                   <div className="form-group mb-2">
                     <input
                       type="text"
-                      name="user_name1"
+                      name="first_name"
                       className="form-control"
                       id="1"
-                      placeholder="User Name"
+                      placeholder="First Name"
+                      required
                     />
                   </div>
                   <div className="form-group mb-2">
                     <input
                       type="text"
-                      name="email_name"
+                      name="last_name"
+                      className="form-control"
+                      id="1"
+                      placeholder="Last Name"
+                      required
+                    />
+                  </div>
+                  <div className="form-group mb-2">
+                    <input
+                      type="email"
+                      name="email"
                       className="form-control"
                       id="email1"
                       placeholder="Email Address"
+                      required
+                    />
+                  </div>
+                  <div className="form-group mb-2">
+                    <input
+                      type="text"
+                      name="phone"
+                      className="form-control"
+                      id="email1"
+                      placeholder="Phone Number"
+                      required
                     />
                   </div>
                   <div className="form-group mb-2">
                     <input
                       type="password"
-                      name="password_name1"
+                      name="password"
                       className="form-control"
                       id="password1"
                       placeholder="Password"
+                      required
                     />
                   </div>
                   <div className="form-group mb-2">
                     <input
                       type="password"
-                      name="repassword_name"
+                      name="repassword"
                       className="form-control"
                       id="repassword"
                       placeholder="Re-enter Password"
+                      required
                     />
                   </div>
                   <div className="form-group mb-2 d-flex">
                     <input
                       type="checkbox"
+                      name="checkbox"
+                      onChange={() => setCheckboxStatus(!checkboxStatus)}
                       className="custom-control-input"
                       id="exampleCheck"
                     />
