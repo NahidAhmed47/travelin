@@ -44,6 +44,7 @@ const Register = () => {
     const res = await createUser({ data });
     if (res?.data?.status === true) {
       Cookies.set("access_token_web_tours", res?.data?.token);
+      localStorage.setItem("user", JSON.stringify(data));
       dispatch(setUser(data));
       Swal.fire({
         icon: "success",

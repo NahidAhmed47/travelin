@@ -6,10 +6,21 @@ import {
   faClock,
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
+import Cookies from "js-cookie";
+import { useDispatch, useSelector } from "react-redux";
+import { setUser } from "../../redux/features/user/userSlice";
+import Swal from "sweetalert2";
 
 const Header = () => {
+  const [token, setToken] = useState(null);
   const [currentWidth, setCurrentWidth] = useState(window.innerWidth);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const token = Cookies.get("access_token_web_tours");
+    setToken(token);
+  }, [user]);
   useEffect(() => {
     const handleResize = () => {
       setCurrentWidth(window.innerWidth);
@@ -19,6 +30,18 @@ const Header = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+  // handle logout
+  const handleLogOut = () => {
+    Cookies.remove("access_token_web_tours");
+    localStorage.removeItem("user");
+    dispatch(setUser(null));
+    Swal.fire({
+      icon: "success",
+      title: "Logout Success!",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
   return (
     <header className="main_header_area">
       <div className="header-content py-1   bg-theme">
@@ -100,7 +123,11 @@ const Header = () => {
               {/* <!-- Brand and toggle get grouped for better mobile display --> */}
               <div className="navbar-header">
                 <Link to={"/"} className="navbar-brand">
-                  <img src="/trslogo.png" alt="image" style={{ width: "70px" }}/>
+                  <img
+                    src="/trslogo.png"
+                    alt="image"
+                    style={{ width: "70px" }}
+                  />
                 </Link>
               </div>
               {currentWidth > 990 && (
@@ -132,24 +159,41 @@ const Header = () => {
                     </div>
                   </div>
                   <div className="register-login d-flex align-items-center">
-                    <NavLink
-                      to={"/login"}
-                      className={({ isActive }) =>
-                        isActive
-                          ? "me-3 nav-menu-item-active nav-menu-login"
-                          : "nav-menu-login me-3"
-                      }
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        height="1em"
-                        viewBox="0 0 448 512"
-                        fill="#777"
+                    {token ? (
+                      <div
+                        onClick={handleLogOut}
+                        className="nav-menu-login me-3"
                       >
-                        <path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z" />
-                      </svg>{" "}
-                      Login/Register
-                    </NavLink>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          height="1em"
+                          viewBox="0 0 448 512"
+                          fill="#777"
+                        >
+                          <path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z" />
+                        </svg>{" "}
+                        LogOut
+                      </div>
+                    ) : (
+                      <NavLink
+                        to={"/login"}
+                        className={({ isActive }) =>
+                          isActive
+                            ? "me-3 nav-menu-item-active nav-menu-login"
+                            : "nav-menu-login me-3"
+                        }
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          height="1em"
+                          viewBox="0 0 448 512"
+                          fill="#777"
+                        >
+                          <path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z" />
+                        </svg>{" "}
+                        Login/Register
+                      </NavLink>
+                    )}
                     <Link to="/" className="nir-btn white book-now-btn">
                       Book Now
                     </Link>
@@ -186,16 +230,33 @@ const Header = () => {
                       </NavLink>
                     </div>
                     <div className="register-login-mobile">
-                      <NavLink
-                        to={"/login"}
-                        className={({ isActive }) =>
-                          isActive
-                            ? "me-3 nav-menu-item-active nav-menu-login"
-                            : "nav-menu-login me-3"
-                        }
-                      >
-                        Login/Register
-                      </NavLink>
+                      {token ? (
+                        <div
+                          onClick={handleLogOut}
+                          className="nav-menu-login me-3"
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="1em"
+                            viewBox="0 0 448 512"
+                            fill="#777"
+                          >
+                            <path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z" />
+                          </svg>{" "}
+                          LogOut
+                        </div>
+                      ) : (
+                        <NavLink
+                          to={"/login"}
+                          className={({ isActive }) =>
+                            isActive
+                              ? "me-3 nav-menu-item-active nav-menu-login"
+                              : "nav-menu-login me-3"
+                          }
+                        >
+                          Login/Register
+                        </NavLink>
+                      )}
                       <Link to="/" className="nir-btn white book-now-btn mt-3">
                         Book Now
                       </Link>

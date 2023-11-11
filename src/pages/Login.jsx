@@ -18,8 +18,9 @@ const Login = () => {
     const data = { email, password };
     const res = await userLogin({ data });
     if (res?.data?.status === true) {
-      dispatch(setUser(data));
+      dispatch(setUser(res?.data?.user));
       Cookies.set("access_token_web_tours", res?.data?.token);
+      localStorage.setItem("user", JSON.stringify(res?.data?.user));
       Swal.fire({
         icon: "success",
         title: "Login Success!",
