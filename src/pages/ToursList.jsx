@@ -7,9 +7,16 @@ import TourListCard from "../components/TourListCard";
 import ExploreYourLife from "../components/common/ExploreYourLife";
 import OurPartners from "../components/common/OurPartners";
 import RelatedDesCard from "../components/RelatedDesCard";
+import { useGetAllTourListQuery } from "../redux/api/apiSlice";
+import Loader from "../components/global/Loader";
+import { useSelector } from "react-redux";
 
 const ToursList = () => {
   const [listViewOpen, setListViewOpen] = useState(false);
+  const { countryId, cityId } = useSelector((state) => state.search);
+  const { data, isLoading } = useGetAllTourListQuery({ countryId, cityId });
+  if (isLoading) return <Loader />;
+  console.log(data?.data);
   return (
     <div>
       {/* <!-- BreadCrumb Starts -->   */}

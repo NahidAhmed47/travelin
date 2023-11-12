@@ -12,9 +12,12 @@ import {
   useGetCitiesByCountryQuery,
 } from "../redux/api/apiSlice";
 import Loader from "../components/global/Loader";
+import { useDispatch } from "react-redux";
+import { setCityId, setCountryId } from "../redux/features/search/searchSlice";
 
 const Home = () => {
   const [selectedCountry, setSelectedCountry] = useState(null);
+  const dispatch = useDispatch();
   const { data, isLoading } = useGetAllCountryQuery();
   const { data: citiesData } = useGetCitiesByCountryQuery({
     countryId: selectedCountry,
@@ -30,6 +33,10 @@ const Home = () => {
   };
   const handleSelectCountry = (e) => {
     setSelectedCountry(e.target.value);
+    dispatch(setCountryId(e.target.value));
+  };
+  const handleSelectCity = (e) => {
+    dispatch(setCityId(e.target.value));
   };
   return (
     <div style={{ backgroundImage: "url(/images/bg/bg1.jpg)" }}>
@@ -92,7 +99,10 @@ const Home = () => {
                             <div className="form-group">
                               <div className="input-box">
                                 <label className="white">City</label>
-                                <select className="niceSelect">
+                                <select
+                                  className="niceSelect"
+                                  onChange={handleSelectCity}
+                                >
                                   <option value="" selected disabled>
                                     Select City
                                   </option>
