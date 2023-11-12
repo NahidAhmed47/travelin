@@ -1,15 +1,15 @@
 import React from "react";
 import PageBanner from "../components/common/PageBanner";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUserLogInMutation } from "../redux/api/apiSlice";
 import Swal from "sweetalert2";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { setUser } from "../redux/features/user/userSlice";
 import Cookies from "js-cookie";
 
 const Login = () => {
   const [userLogin, { error }] = useUserLogInMutation();
-  const { user } = useSelector((state) => state.user);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleLoginUser = async (e) => {
     e.preventDefault();
@@ -27,6 +27,7 @@ const Login = () => {
         showConfirmButton: false,
         timer: 1500,
       });
+      navigate("/");
       e.target.reset();
     } else {
       Swal.fire({

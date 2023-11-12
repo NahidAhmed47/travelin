@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import PageBanner from "../components/common/PageBanner";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useCreateUserMutation } from "../redux/api/apiSlice";
 import Cookies from "js-cookie";
 import { setUser } from "../redux/features/user/userSlice";
@@ -10,7 +10,7 @@ import { setUser } from "../redux/features/user/userSlice";
 const Register = () => {
   const [checkboxStatus, setCheckboxStatus] = useState(false);
   const [createUser, { error }] = useCreateUserMutation();
-  const { user } = useSelector((state) => state.user);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleRegisterUser = async (e) => {
     e.preventDefault();
@@ -52,6 +52,7 @@ const Register = () => {
         showConfirmButton: false,
         timer: 1500,
       });
+      navigate("/");
       e.target.reset();
     } else {
       Swal.fire({
