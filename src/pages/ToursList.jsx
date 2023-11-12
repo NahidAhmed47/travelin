@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PageBanner from "../components/common/PageBanner";
 import TourGridCard from "../components/TourGridCard";
 import durationType from "../fake-data/durationType";
@@ -11,17 +11,71 @@ import {
   useGetCategoriesQuery,
 } from "../redux/api/apiSlice";
 import Loader from "../components/global/Loader";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import RelatedDesContainer from "../components/common/RelatedDesContainer";
+import {
+  removeCategoryId,
+  setCategoryId,
+  setReset,
+  setSortBy,
+} from "../redux/features/filter/filterSlice";
 
 const ToursList = () => {
   const [listViewOpen, setListViewOpen] = useState(false);
+  const dispatch = useDispatch();
   const { countryId, cityId } = useSelector((state) => state.search);
-  const { data, isLoading } = useGetAllTourListQuery({ countryId, cityId });
+  const { categoryIds, sortBy, minPrice, maxPrice } = useSelector(
+    (state) => state.filter
+  );
+  const { data, isLoading, refetch } = useGetAllTourListQuery({
+    countryId,
+    cityId,
+    categoryIds,
+    sortBy,
+    minPrice,
+    maxPrice,
+  });
   const { data: categoriesData } = useGetCategoriesQuery();
+  useEffect(() => {
+    refetch();
+  }, [categoryIds, sortBy, minPrice, maxPrice, countryId, cityId, refetch]);
   if (isLoading) return <Loader />;
   const toursList = data?.data;
   const categories = categoriesData?.data;
+  // handle sort filter
+  const handleSortFilter = (e) => {
+    const value = e.target.value;
+    // if (value === "reset") {
+    //   dispatch(
+    //     setReset({
+    //       categoryIds: [],
+    //       minPrice: 0,
+    //       maxPrice: "",
+    //       sortBy: "",
+    //     })
+    //   );
+    // }
+
+    if (value == "lth") {
+      dispatch(setSortBy("1"));
+    }
+    if (value == "htl") {
+      dispatch(setSortBy("0"));
+    }
+    if (value == "avgRating") {
+      // dispatch(set);
+    }
+  };
+  // handle select category
+  const handleSelectCategory = (id) => {
+    console.log(categoryIds);
+    const index = categoryIds.indexOf(id);
+    if (index === -1) {
+      dispatch(setCategoryId(id));
+    } else {
+      dispatch(removeCategoryId(id));
+    }
+  };
   return (
     <div>
       {/* <!-- BreadCrumb Starts -->   */}
@@ -66,11 +120,11 @@ const ToursList = () => {
                     </div>
                   </div>
                   <div className="sortby d-flex align-items-center justify-content-between ml-2">
-                    <select className="niceSelect">
-                      <option value="1">Sort By</option>
-                      <option value="2">Average rating</option>
-                      <option value="3">Price: low to high</option>
-                      <option value="4">Price: high to low</option>
+                    <select className="niceSelect" onChange={handleSortFilter}>
+                      <option value="reset">Sort By</option>
+                      <option value="avgRating">Average rating</option>
+                      <option value="lth">Price: low to high</option>
+                      <option value="htl">Price: high to low</option>
                     </select>
                   </div>
                 </div>
@@ -129,7 +183,13 @@ const ToursList = () => {
                     <ul className="sidebar-category1">
                       {categories?.map((category, index) => (
                         <li key={index}>
-                          <input type="checkbox" /> {category?.name_en}
+                          <input
+                            type="checkbox"
+                            onChange={() =>
+                              handleSelectCategory(JSON.stringify(category?.id))
+                            }
+                          />{" "}
+                          {category?.name_en}
                           <span className="float-end">
                             {category?.totalItem}
                           </span>
@@ -178,7 +238,9 @@ const ToursList = () => {
 
                   <div className="sidebar-item">
                     <h3>Related Destinations</h3>
-                    <RelatedDesContainer relatedDestination={data?.related_cities}/>
+                    <RelatedDesContainer
+                      relatedDestination={data?.related_cities}
+                    />
                   </div>
                 </div>
               </div>
