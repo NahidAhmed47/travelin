@@ -1,23 +1,27 @@
 import React, { useState } from "react";
 import PageBanner from "../components/common/PageBanner";
 import TourGridCard from "../components/TourGridCard";
-import categories from "../fake-data/categories";
 import durationType from "../fake-data/durationType";
 import TourListCard from "../components/TourListCard";
 import ExploreYourLife from "../components/common/ExploreYourLife";
 import OurPartners from "../components/common/OurPartners";
 import RelatedDesCard from "../components/RelatedDesCard";
-import { useGetAllTourListQuery } from "../redux/api/apiSlice";
+import {
+  useGetAllTourListQuery,
+  useGetCategoriesQuery,
+} from "../redux/api/apiSlice";
 import Loader from "../components/global/Loader";
 import { useSelector } from "react-redux";
+import RelatedDesContainer from "../components/common/RelatedDesContainer";
 
 const ToursList = () => {
   const [listViewOpen, setListViewOpen] = useState(false);
   const { countryId, cityId } = useSelector((state) => state.search);
   const { data, isLoading } = useGetAllTourListQuery({ countryId, cityId });
+  const { data: categoriesData } = useGetCategoriesQuery();
   if (isLoading) return <Loader />;
-  console.log(data);
   const toursList = data?.data;
+  const categories = categoriesData?.data;
   return (
     <div>
       {/* <!-- BreadCrumb Starts -->   */}
@@ -125,7 +129,7 @@ const ToursList = () => {
                     <ul className="sidebar-category1">
                       {categories?.map((category, index) => (
                         <li key={index}>
-                          <input type="checkbox" /> {category?.name}
+                          <input type="checkbox" /> {category?.name_en}
                           <span className="float-end">
                             {category?.totalItem}
                           </span>
@@ -174,12 +178,7 @@ const ToursList = () => {
 
                   <div className="sidebar-item">
                     <h3>Related Destinations</h3>
-                    <div className="sidebar-destination ">
-                      <div className="row about-slider related-destination-slider">
-                        <RelatedDesCard />
-                        <RelatedDesCard />
-                      </div>
-                    </div>
+                    <RelatedDesContainer relatedDestination={data?.related_cities}/>
                   </div>
                 </div>
               </div>

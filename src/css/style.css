@@ -8816,14 +8816,24 @@ ul.sidebar-tags li a:hover {
   height: 100%;
 }
 
-/* .related-destination-slider{
-  display: flex !important;
-  gap: 10px;
-  height: 500px;
-  width: fit-content !important;
-  overflow-x: hidden !important;
-  border: 1px solid #f1f1f1;
-} */
+/* Slideshow */
+
+.slideshow {
+  margin: 0 auto;
+  overflow: hidden;
+  max-width: 600px;
+}
+
+.slideshowSlider {
+  white-space: nowrap;
+  transition: ease 1000ms;
+}
+
+.slide {
+  display: inline-block;
+  height: auto;
+  width: 100%;
+}
 
 
 .no-tour-found {

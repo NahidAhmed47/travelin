@@ -1,5 +1,6 @@
 import React from "react";
 import RelatedDesCard from "./RelatedDesCard";
+import RelatedDesContainer from "./common/RelatedDesContainer";
 
 const MakeBookingCntn = () => {
   return (
@@ -117,12 +118,7 @@ const MakeBookingCntn = () => {
 
           <div className="sidebar-item">
             <h3>Related Destinations</h3>
-            <div className="sidebar-destination">
-              <div className="row about-slider">
-                <RelatedDesCard />
-                <RelatedDesCard />
-              </div>
-            </div>
+            <RelatedDesContainer relatedDestination={[1,2]}/>
           </div>
         </div>
       </div>
