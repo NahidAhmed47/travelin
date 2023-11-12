@@ -16,7 +16,8 @@ const ToursList = () => {
   const { countryId, cityId } = useSelector((state) => state.search);
   const { data, isLoading } = useGetAllTourListQuery({ countryId, cityId });
   if (isLoading) return <Loader />;
-  console.log(data?.data);
+  console.log(data);
+  const toursList = data?.data;
   return (
     <div>
       {/* <!-- BreadCrumb Starts -->   */}
@@ -73,30 +74,46 @@ const ToursList = () => {
 
               {listViewOpen || (
                 <div className="row">
-                  {[1, 2, 3, 4, 5, 6].map((item, index) => (
-                    <TourGridCard key={index} />
+                  {toursList.map((tour, index) => (
+                    <TourGridCard key={index} tour={tour} />
                   ))}
-                  <div className="col-lg-12">
-                    <div className="text-center">
-                      <a href="#" className="nir-btn">
-                        Load More <i className="fa fa-long-arrow-alt-right"></i>
-                      </a>
+                  {toursList?.length === 0 && (
+                    <div className="no-tour-found">
+                      <i>No tour found!</i>
                     </div>
-                  </div>
+                  )}
+                  {toursList?.length > 6 && (
+                    <div className="col-lg-12">
+                      <div className="text-center">
+                        <a href="#" className="nir-btn">
+                          Load More{" "}
+                          <i className="fa fa-long-arrow-alt-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
               {listViewOpen && (
                 <div className="destination-list">
-                  {[1, 2, 3, 4, 5, 6].map((item, index) => (
-                    <TourListCard key={index} />
+                  {toursList.map((tour, index) => (
+                    <TourListCard key={index} tour={tour} />
                   ))}
-                  <div className="col-lg-12">
-                    <div className="text-center">
-                      <a href="#" className="nir-btn">
-                        Load More <i className="fa fa-long-arrow-alt-right"></i>
-                      </a>
+                  {toursList?.length === 0 && (
+                    <div className="no-tour-found">
+                      <i>No tour found!</i>
                     </div>
-                  </div>
+                  )}
+                  {toursList?.length > 6 && (
+                    <div className="col-lg-12">
+                      <div className="text-center">
+                        <a href="#" className="nir-btn">
+                          Load More{" "}
+                          <i className="fa fa-long-arrow-alt-right"></i>
+                        </a>
+                      </div>
+                    </div>
+                  )}
                 </div>
               )}
             </div>

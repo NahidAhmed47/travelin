@@ -8824,4 +8824,13 @@ ul.sidebar-tags li a:hover {
   overflow-x: hidden !important;
   border: 1px solid #f1f1f1;
 } */
+
+
+.no-tour-found {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 18px;
+  font-weight: 400;
+}
+
 /* # sourceMappingURL=style.css.map */
