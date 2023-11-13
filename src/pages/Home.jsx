@@ -14,6 +14,7 @@ import {
 import Loader from "../components/global/Loader";
 import { useDispatch } from "react-redux";
 import { setCityId, setCountryId } from "../redux/features/search/searchSlice";
+import DropdownMenu from "../components/common/DropdownMenu";
 
 const Home = () => {
   const [selectedCountry, setSelectedCountry] = useState(null);
@@ -31,9 +32,9 @@ const Home = () => {
   const handleSearchClick = () => {
     navigate("/tours-list");
   };
-  const handleSelectCountry = (e) => {
-    setSelectedCountry(e.target.value);
-    dispatch(setCountryId(e.target.value));
+  const handleSelectCountry = (id) => {
+    setSelectedCountry(id);
+    dispatch(setCountryId(id));
   };
   const handleSelectCity = (e) => {
     dispatch(setCityId(e.target.value));
@@ -76,22 +77,11 @@ const Home = () => {
                             <div className="form-group">
                               <div className="input-box">
                                 <label className="white">Country</label>
-                                <select
-                                  className="select-box "
-                                  onChange={handleSelectCountry}
-                                >
-                                  <option value="" selected disabled>
-                                    Select Country
-                                  </option>
-                                  {countries?.map((country) => (
-                                    <option
-                                      key={country?.id}
-                                      value={country?.id}
-                                    >
-                                      {country?.name}
-                                    </option>
-                                  ))}
-                                </select>
+                                <DropdownMenu
+                                  selectedTxt={"Select Country"}
+                                  data={countries}
+                                  handleSelect={handleSelectCountry}
+                                />
                               </div>
                             </div>
                           </div>

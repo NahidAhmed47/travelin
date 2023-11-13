@@ -677,6 +677,7 @@ select {
 
 select option {
   color: #3f3f3f;
+  padding: 30px;
 }
 
 textarea {
@@ -8843,7 +8844,7 @@ ul.sidebar-tags li a:hover {
   font-weight: 400;
 }
 
-.price-range-thumb{
+.price-range-thumb {
   background: white;
   border: 1px solid #ccc;
   border-radius: 50%;
@@ -8857,19 +8858,79 @@ ul.sidebar-tags li a:hover {
   cursor: pointer;
 }
 
-.price-range-thumb:focus{
+.price-range-thumb:focus {
   outline: none;
 }
 
-.price-range-track{
+.price-range-track {
   background: #ccc;
   height: 5px;
   position: relative;
   cursor: pointer;
 }
 
-.price-range-track-1{
+.price-range-track-1 {
   background: #029e9d;
 }
+
+.select-box {
+  font-size: 15px;
+  font-weight: 300;
+  background-color: #fff;
+  border: 1px solid #f1f1f1;
+  border-radius: 10px;
+  padding: 12px 20px;
+  color: #777;
+  margin-bottom: 0;
+  height: 50px;
+  box-shadow: none;
+  width: 100%;
+  position: relative;
+  z-index: 100;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.dropdown-heading {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dropdown-heading img {
+  padding-top: 5px;
+  rotate: 180deg;
+}
+
+.dropdown-option-box {
+  position: absolute;
+  top: 110%;
+  background-color: white;
+  left: 0;
+  border-radius: 5px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0px;
+  gap: 5px;
+  color: #181d20;
+  max-height: 400px;
+  overflow: auto;
+}
+
+.dropdown-option-box p {
+  margin: 0;
+  padding: 5px 20px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.dropdown-option-box p:hover {
+  background-color: #f1f1f1;
+}
+/* .open-icon{
+  rotate: 0;
+} */
 
 /* # sourceMappingURL=style.css.map */
