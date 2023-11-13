@@ -1,14 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const TourGridCard = ({ tour }) => {
   const { id, title_en, price, duration, description_en, images } = tour;
   console.log(tour);
+  const navigate = useNavigate();
   const handleTourDetails = (id) => {
-    window.location.href = `/tours-list/details/${id}`;
+    navigate(`/tours-list/details/${id}`);
   };
   return (
     <div
-      onClick={() => handleTourDetails(1)}
+      onClick={() => handleTourDetails(id)}
       className="col-lg-6 col-md-6 mb-4"
       style={{ cursor: "pointer" }}
     >
@@ -25,7 +27,7 @@ const TourGridCard = ({ tour }) => {
           <div className="trend-meta bg-theme white px-3 py-2 rounded">
             <div className="entry-author">
               <i className="icon-calendar"></i>
-              <span className="fw-bold"> 9 Days Tours</span>
+              <span className="fw-bold"> {duration} Days Tours</span>
             </div>
           </div>
           <h5 className="theme mb-1">
