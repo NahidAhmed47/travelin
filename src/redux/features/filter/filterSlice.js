@@ -5,7 +5,7 @@ const filterSlice = createSlice({
     initialState: {
         categoryIds: [],
         minPrice: 0,
-        maxPrice: "",
+        maxPrice: 20000,
         sortBy: '',
     },
     reducers: {

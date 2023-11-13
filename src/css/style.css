@@ -8843,4 +8843,33 @@ ul.sidebar-tags li a:hover {
   font-weight: 400;
 }
 
+.price-range-thumb{
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-40%);
+  z-index: 1;
+  color: white;
+  cursor: pointer;
+}
+
+.price-range-thumb:focus{
+  outline: none;
+}
+
+.price-range-track{
+  background: #ccc;
+  height: 5px;
+  position: relative;
+  cursor: pointer;
+}
+
+.price-range-track-1{
+  background: #029e9d;
+}
+
 /* # sourceMappingURL=style.css.map */

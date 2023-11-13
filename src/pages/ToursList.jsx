@@ -15,12 +15,17 @@ import RelatedDesContainer from "../components/common/RelatedDesContainer";
 import {
   removeCategoryId,
   setCategoryId,
+  setMaxPrice,
+  setMinPrice,
   setReset,
   setSortBy,
 } from "../redux/features/filter/filterSlice";
+import ReactSlider from "react-slider";
 
 const ToursList = () => {
   const [listViewOpen, setListViewOpen] = useState(false);
+  const [minValue, setMinValue] = useState(0);
+  const [maxValue, setMaxValue] = useState(20000);
   const dispatch = useDispatch();
   const { countryId, cityId } = useSelector((state) => state.search);
   const { categoryIds, sortBy, minPrice, maxPrice } = useSelector(
@@ -67,13 +72,17 @@ const ToursList = () => {
   };
   // handle select category
   const handleSelectCategory = (id) => {
-    console.log(categoryIds);
     const index = categoryIds.indexOf(id);
     if (index === -1) {
       dispatch(setCategoryId(id));
     } else {
       dispatch(removeCategoryId(id));
     }
+  };
+
+  const handleSliderChange = (values) => {
+    dispatch(setMinPrice(values[0]));
+    dispatch(setMaxPrice(values[1]));
   };
   return (
     <div>
@@ -153,7 +162,7 @@ const ToursList = () => {
               )}
               {listViewOpen && (
                 <div className="destination-list">
-                  {toursList.map((tour, index) => (
+                  {toursList?.map((tour, index) => (
                     <TourListCard key={index} tour={tour} />
                   ))}
                   {toursList?.length === 0 && (
@@ -215,23 +224,22 @@ const ToursList = () => {
                     <h3 className="">Duration Type</h3>
                     <div className="range-slider mt-0">
                       <p className="text-start mb-2">Price Range</p>
-                      <div
-                        data-min="0"
-                        data-max="2000"
-                        data-unit="$"
-                        data-min-name="min_price"
-                        data-max-name="max_price"
-                        className="range-slider-ui ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all"
-                        aria-disabled="false"
-                      >
-                        <span className="min-value">0 $</span>
-                        <span className="max-value">20000 $</span>
-                        <div
-                          className="ui-slider-range ui-widget-header ui-corner-all full"
-                          style={{ left: "0%", width: "100%" }}
-                        ></div>
-                      </div>
+                      <ReactSlider
+                        className="horizontal-slider"
+                        thumbClassName="price-range-thumb"
+                        trackClassName="price-range-track"
+                        defaultValue={[minPrice, maxPrice]}
+                        ariaLabel={["Lower thumb", "Upper thumb"]}
+                        onChange={handleSliderChange}
+                        pearling
+                        minDistance={10}
+                        max={20000}
+                      />
                       <div className="clearfix"></div>
+                      <div className="w-100 px-2">
+                        <span className="min-value">{minPrice} $</span>
+                        <span className="max-value">{maxPrice} $</span>
+                      </div>
                     </div>
                   </div>
 

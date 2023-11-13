@@ -28,7 +28,7 @@ const api = createApi({
             }),
         }),
         getAllTourList: builder.query({
-            query: ({ countryId, cityId, sortBy, categoryIds, minPrice, MaxPrice }) => `/api/tours/list?category_id=&city_id=${cityId}&category_ids=[${categoryIds}]&country_id=${countryId}&min_price=${minPrice}&max_price=${MaxPrice}&sort_by=${sortBy}`,
+            query: ({ countryId, cityId, sortBy, categoryIds, minPrice, maxPrice }) => `/api/tours/list?category_id=&city_id=${cityId}&category_ids=[${categoryIds}]&country_id=${countryId}&min_price=${minPrice}&max_price=${maxPrice}&sort_by=${sortBy}`,
         }),
         getSingleTour: builder.query({
             query: ({ tourId }) => `/api/tours/${tourId}`,

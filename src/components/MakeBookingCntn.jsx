@@ -14,7 +14,7 @@ const MakeBookingCntn = () => {
 
     if (!token || !user) {
       Swal.fire({
-        title: "Please login to book tour!",
+        title: "You need to login for add cart!",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -99,7 +99,7 @@ const MakeBookingCntn = () => {
                 <div className="col-lg-12">
                   <div className="form-group mb-0">
                     <button className="nir-btn w-100" onClick={handleBookTour}>
-                      Book Now
+                      Add to cart
                     </button>
                   </div>
                 </div>
