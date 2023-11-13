@@ -36,8 +36,18 @@ const api = createApi({
         getCategories: builder.query({
             query: () => '/api/categories/list',
         }),
+        addCart: builder.mutation({
+            query: ({ data, token }) => ({
+                url: '/api/carts/add',
+                method: 'POST',
+                headers: {
+                    Authorization: `31|wKzgtIFk7bifxQxxBeUeXJV0C8R3CzZYeBP99DyS6d799cb6`,
+                },
+                body: data,
+            }),
+        }),
     })
 })
 
-export const { useGetToursQuery, useGetAllCountryQuery, useGetCitiesByCountryQuery, useGetAllTourListQuery, useGetSingleTourQuery, useGetCategoriesQuery, useCreateUserMutation, useUserLogInMutation } = api;
+export const { useGetToursQuery, useGetAllCountryQuery, useGetCitiesByCountryQuery, useGetAllTourListQuery, useGetSingleTourQuery, useGetCategoriesQuery, useCreateUserMutation, useUserLogInMutation, useAddCartMutation } = api;
 export default api;

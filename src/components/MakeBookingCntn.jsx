@@ -7,6 +7,8 @@ import { useSelector } from "react-redux";
 import DatePicker from "react-date-picker";
 import "react-date-picker/dist/DatePicker.css";
 import "react-calendar/dist/Calendar.css";
+import { format } from "date-fns";
+import { useAddCartMutation } from "../redux/api/apiSlice";
 
 const MakeBookingCntn = ({ tour }) => {
   console.log(tour);
@@ -14,11 +16,13 @@ const MakeBookingCntn = ({ tour }) => {
   const token = Cookies.get("access_token_web_tours");
   const [guest, setGuest] = useState(1);
   const { user } = useSelector((state) => state.user);
+  const [addCart, { error }] = useAddCartMutation();
   const navigate = useNavigate();
   const costWithGuest = tour?.price * guest;
   const vat = (tour?.vat ? tour?.vat / 100 : 0) * costWithGuest;
   const totalCost = costWithGuest + vat;
-  const handleBookTour = () => {
+  const formattedDate = date ? format(date, "yyyy-MM-dd") : "";
+  const handleBookTour = async () => {
     if (!token || !user) {
       Swal.fire({
         title: "You need to login for add cart!",
@@ -38,19 +42,23 @@ const MakeBookingCntn = ({ tour }) => {
     const cart = {
       tour_id: tour?.id,
       guests_no: guest,
-      date: date,
+      date: formattedDate,
+      vehicle_id: 0,
     };
-    // Swal.fire({
-    //   title: "Yay! Cart added successfully!",
-    //   icon: "success",
-    //   showCancelButton: false,
-    //   confirmButtonColor: "#3085d6",
-    //   confirmButtonText: "Go to cart",
-    // }).then((result) => {
-    //   if (result.isConfirmed) {
-    //     navigate(`/cart?u_id=${user?.id}`);
-    //   }
-    // });
+    // console.log(cart);
+    // const res = await addCart({ data: cart, token });
+    // console.log(res);
+    Swal.fire({
+      title: "Yay! Cart added successfully!",
+      icon: "success",
+      showCancelButton: false,
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "Go to cart",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate(`/cart?u_id=${user?.id}`);
+      }
+    });
   };
   return (
     <div className="col-lg-4 ps-lg-4">
@@ -68,7 +76,7 @@ const MakeBookingCntn = ({ tour }) => {
                     <h4 className="choosen-date white mb-0 border-0">
                       <i className="fa fa-calendar"></i> {date?.toDateString()}
                       <small className="d-flex justify-content-between fw-normal w-100 my-2">
-                        (5 days){" "}
+                        ({tour?.duration} days){" "}
                       </small>
                     </h4>
                   </div>
@@ -91,7 +99,10 @@ const MakeBookingCntn = ({ tour }) => {
                     </div>
                   </div>
                   <label className="white">Select Date:</label>
-                  <div className="" style={{ height: "60px", marginBottom: "5px" }}>
+                  <div
+                    className=""
+                    style={{ height: "60px", marginBottom: "5px" }}
+                  >
                     <DatePicker
                       onChange={onChangeDate}
                       value={date}
