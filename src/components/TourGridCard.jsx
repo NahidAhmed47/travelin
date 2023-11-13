@@ -44,7 +44,12 @@ const TourGridCard = ({ tour }) => {
             </div>
             <span className="ms-2">(12)</span>
           </div>
-          <p className=" border-b pb-2 mb-2">{description_en}</p>
+          <div
+            className=" border-b pb-2 mb-2"
+            id="description-field"
+            style={{ maxHeight: "100px", overflow: "hidden", width: "100%" }}
+            dangerouslySetInnerHTML={{ __html: description_en }}
+          ></div>
           <div className="entry-meta">
             <div className="entry-author d-flex align-items-center">
               <p className="mb-0">

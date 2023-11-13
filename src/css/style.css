@@ -8886,9 +8886,23 @@ ul.sidebar-tags li a:hover {
   box-shadow: none;
   width: 100%;
   position: relative;
-  z-index: 100;
   font-weight: 400;
   cursor: pointer;
+}
+
+@media screen and (max-width: 767px) {
+  .select-box {
+    font-size: 14px;
+    height: auto;
+  }
+
+}
+
+@media (min-width: 767px) {
+  .select-box {
+    min-width: 205px;
+  }
+
 }
 
 .dropdown-heading {
@@ -8916,7 +8930,9 @@ ul.sidebar-tags li a:hover {
   gap: 5px;
   color: #181d20;
   max-height: 400px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
   overflow: auto;
+  z-index: 999999;
 }
 
 .dropdown-option-box p {
@@ -8929,6 +8945,7 @@ ul.sidebar-tags li a:hover {
 .dropdown-option-box p:hover {
   background-color: #f1f1f1;
 }
+
 /* .open-icon{
   rotate: 0;
 } */

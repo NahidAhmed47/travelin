@@ -115,7 +115,13 @@ const TourDetails = () => {
 
                   <div className="description mb-2">
                     <h4>Description</h4>
-                    <p>{description_en}</p>
+                    <div
+                      id="description-field"
+                      style={{
+                        width: "100%",
+                      }}
+                      dangerouslySetInnerHTML={{ __html: description_en }}
+                    ></div>
                     {/* <p className="mb-0">
                       The passage is attributed to an unknown typesetter in the
                       15th century who is thought to have scrambled parts of
@@ -429,7 +435,7 @@ const TourDetails = () => {
                 </div>
               </div>
 
-              <MakeBookingCntn />
+              <MakeBookingCntn tour={tour} />
             </div>
           </div>
         </section>

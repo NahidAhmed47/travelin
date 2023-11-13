@@ -1,17 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import RelatedDesContainer from "./common/RelatedDesContainer";
 import Cookies from "js-cookie";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const MakeBookingCntn = () => {
+const MakeBookingCntn = ({ tour }) => {
+  console.log(tour);
   const token = Cookies.get("access_token_web_tours");
+  const [guest, setGuest] = useState(1);
   const { user } = useSelector((state) => state.user);
   const navigate = useNavigate();
-  const handleBookTour = (e) => {
-    e.preventDefault();
-
+  const costWithGuest = tour?.price * guest;
+  const vat = (tour?.vat ? tour?.vat / 100 : 0) * costWithGuest;
+  const totalCost = costWithGuest + vat;
+  const handleBookTour = () => {
     if (!token || !user) {
       Swal.fire({
         title: "You need to login for add cart!",
@@ -26,14 +29,26 @@ const MakeBookingCntn = () => {
           navigate("/login");
         }
       });
+      return;
     }
+    Swal.fire({
+      title: "Yay! Cart added successfully!",
+      icon: "success",
+      showCancelButton: false,
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "Go to cart",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate(`/cart?u_id=${user?.id}`);
+      }
+    });
   };
   return (
     <div className="col-lg-4 ps-lg-4">
       <div className="sidebar-sticky">
         <div className="list-sidebar">
           <div className="sidebar-item">
-            <form className="form-content rounded overflow-hidden bg-title">
+            <div className="form-content rounded overflow-hidden bg-title">
               <h4 className="white text-center border-b pb-2">
                 MAKE A BOOKING
               </h4>
@@ -58,7 +73,10 @@ const MakeBookingCntn = () => {
                     <label className="white">No. Of People</label>
                     <div className="input-box">
                       <i className="flaticon-add-user"></i>
-                      <select className="niceSelect">
+                      <select
+                        className="niceSelect"
+                        onChange={(e) => setGuest(e.target.value)}
+                      >
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -72,16 +90,27 @@ const MakeBookingCntn = () => {
                   <div className="form-group bg-white p-3 rounded mb-2">
                     <ul>
                       <li className="d-block pb-1">
-                        $150.00 x 2 guests
-                        <span className="float-end fw-bold">$300.00</span>
+                        $
+                        {Number.isInteger(tour?.price)
+                          ? tour?.price + ".00"
+                          : tour?.price}{" "}
+                        x {guest} guests
+                        <span className="float-end fw-bold">
+                          $
+                          {Number.isInteger(costWithGuest)
+                            ? costWithGuest + ".00"
+                            : costWithGuest}
+                        </span>
                       </li>
                       <li className="d-block pb-1">
                         Booking fee + tax
-                        <span className="float-end  fw-bold">$10.00</span>
+                        <span className="float-end  fw-bold">
+                          ${Number.isInteger(vat) ? vat + ".00" : vat}
+                        </span>
                       </li>
                       <li className="d-block  pb-1">
                         Book now &amp; Save
-                        <span className="float-end   fw-bold">-$15</span>
+                        <span className="float-end   fw-bold">$0</span>
                       </li>
                       <li className="d-block pb-1">
                         Other fees
@@ -90,7 +119,12 @@ const MakeBookingCntn = () => {
                       <li className="d-block border-t">
                         <div className="pt-1">
                           <span className="fw-bold">Total</span>
-                          <span className="float-end  fw-bold">$350.00</span>
+                          <span className="float-end  fw-bold">
+                            $
+                            {Number.isInteger(totalCost)
+                              ? totalCost + ".00"
+                              : totalCost}
+                          </span>
                         </div>
                       </li>
                     </ul>
@@ -104,7 +138,7 @@ const MakeBookingCntn = () => {
                   </div>
                 </div>
               </div>
-            </form>
+            </div>
           </div>
 
           <div className="sidebar-item">

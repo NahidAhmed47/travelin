@@ -24,8 +24,8 @@ import ReactSlider from "react-slider";
 
 const ToursList = () => {
   const [listViewOpen, setListViewOpen] = useState(false);
-  const [minValue, setMinValue] = useState(0);
-  const [maxValue, setMaxValue] = useState(20000);
+  const [openDropdown, setOpenDropdown] = useState(false);
+  const [title, setTitle] = useState("Sort By");
   const dispatch = useDispatch();
   const { countryId, cityId } = useSelector((state) => state.search);
   const { categoryIds, sortBy, minPrice, maxPrice } = useSelector(
@@ -47,8 +47,7 @@ const ToursList = () => {
   const toursList = data?.data;
   const categories = categoriesData?.data;
   // handle sort filter
-  const handleSortFilter = (e) => {
-    const value = e.target.value;
+  const handleSortFilter = (value) => {
     // if (value === "reset") {
     //   dispatch(
     //     setReset({
@@ -59,7 +58,9 @@ const ToursList = () => {
     //     })
     //   );
     // }
-
+    if(value === "srt"){
+      dispatch(setSortBy(""));
+    }
     if (value == "lth") {
       dispatch(setSortBy("1"));
     }
@@ -127,13 +128,46 @@ const ToursList = () => {
                       <i className="fa fa-th rounded"></i>
                     </div>
                   </div>
-                  <div className="sortby d-flex align-items-center justify-content-between ml-2">
+                  {/* <div className="sortby d-flex align-items-center justify-content-between ml-2">
                     <select className="niceSelect" onChange={handleSortFilter}>
                       <option value="reset">Sort By</option>
                       <option value="avgRating">Average rating</option>
                       <option value="lth">Price: low to high</option>
                       <option value="htl">Price: high to low</option>
                     </select>
+                  </div> */}
+                  <div
+                    className="select-box "
+                    onClick={() => setOpenDropdown(!openDropdown)}
+                  >
+                    <div className="dropdown-heading" style={{ gap: "10px" }}>
+                      <p>{title}</p>
+                      <img
+                        src="/images/clicons.png"
+                        className={openDropdown && "open-icon"}
+                      ></img>
+                    </div>
+                    {openDropdown && (
+                      <div className="dropdown-option-box">
+                        <p onClick={() => (setTitle("Sort By"), handleSortFilter("srt"))}>Sort By</p>
+                        <p
+                          onClick={() => (
+                            setTitle("Price: Low to High"),
+                            handleSortFilter("lth")
+                          )}
+                        >
+                          Price: Low to High
+                        </p>
+                        <p
+                          onClick={() => (
+                            setTitle("Price: High to Low"),
+                            handleSortFilter("htl")
+                          )}
+                        >
+                          Price: High to Low
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

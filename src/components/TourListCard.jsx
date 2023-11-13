@@ -31,12 +31,18 @@ const TourListCard = ({ tour }) => {
             <h6 className="theme mb-0">
               <i className="icon-location-pin"></i> Croatia
             </h6>
-            <p className="mt-4 mb-0">
+            {/* <p className="mt-4 mb-0">
               Taking Safety Measures <br />
               <a href="#">
                 <span className="theme"> Free cancellation</span>
               </a>
-            </p>
+            </p> */}
+            <div
+              className=" mt-4 mb-0"
+              id="description-field"
+              style={{ maxHeight: "100px", overflow: "hidden", width: "100%" }}
+              dangerouslySetInnerHTML={{ __html: description_en }}
+            ></div>
           </div>
         </div>
         <div className="col-lg-3 col-md-3">
@@ -51,7 +57,9 @@ const TourListCard = ({ tour }) => {
             <small>200 Reviews</small>
             <div className="trend-price my-2">
               <span className="mb-0">From</span>
-              <h3 className="mb-0">${Number.isInteger(price) ? price + ".00" : price}</h3>
+              <h3 className="mb-0">
+                ${Number.isInteger(price) ? price + ".00" : price}
+              </h3>
               <small>Per Person</small>
             </div>
             <Link to={`/tours-list/details/${id}`} className="nir-btn">
