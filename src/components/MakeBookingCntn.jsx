@@ -4,9 +4,13 @@ import Cookies from "js-cookie";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import DatePicker from "react-date-picker";
+import "react-date-picker/dist/DatePicker.css";
+import "react-calendar/dist/Calendar.css";
 
 const MakeBookingCntn = ({ tour }) => {
   console.log(tour);
+  const [date, onChangeDate] = useState(new Date());
   const token = Cookies.get("access_token_web_tours");
   const [guest, setGuest] = useState(1);
   const { user } = useSelector((state) => state.user);
@@ -31,17 +35,22 @@ const MakeBookingCntn = ({ tour }) => {
       });
       return;
     }
-    Swal.fire({
-      title: "Yay! Cart added successfully!",
-      icon: "success",
-      showCancelButton: false,
-      confirmButtonColor: "#3085d6",
-      confirmButtonText: "Go to cart",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        navigate(`/cart?u_id=${user?.id}`);
-      }
-    });
+    const cart = {
+      tour_id: tour?.id,
+      guests_no: guest,
+      date: date,
+    };
+    // Swal.fire({
+    //   title: "Yay! Cart added successfully!",
+    //   icon: "success",
+    //   showCancelButton: false,
+    //   confirmButtonColor: "#3085d6",
+    //   confirmButtonText: "Go to cart",
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     navigate(`/cart?u_id=${user?.id}`);
+    //   }
+    // });
   };
   return (
     <div className="col-lg-4 ps-lg-4">
@@ -57,17 +66,13 @@ const MakeBookingCntn = ({ tour }) => {
                   <div className="form-group">
                     <span className="white pb-1">Your choosen date is</span>
                     <h4 className="choosen-date white mb-0 border-0">
-                      <i className="fa fa-calendar"></i> 10 - 15 March, 2020{" "}
+                      <i className="fa fa-calendar"></i> {date?.toDateString()}
                       <small className="d-flex justify-content-between fw-normal w-100 my-2">
                         (5 days){" "}
-                        <a href="#" className="white text-decoration-underline">
-                          Change
-                        </a>
                       </small>
                     </h4>
                   </div>
                 </div>
-
                 <div className="col-lg-12">
                   <div className="form-group mb-2">
                     <label className="white">No. Of People</label>
@@ -84,6 +89,14 @@ const MakeBookingCntn = ({ tour }) => {
                         <option value="5">5</option>
                       </select>
                     </div>
+                  </div>
+                  <label className="white">Select Date:</label>
+                  <div className="" style={{ height: "60px", marginBottom: "5px" }}>
+                    <DatePicker
+                      onChange={onChangeDate}
+                      value={date}
+                      className="custom-date-input"
+                    />
                   </div>
                 </div>
                 <div className="col-lg-12">
