@@ -6,6 +6,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import ToursList from "../pages/ToursList";
 import TourDetails from "../pages/TourDetails";
+import Cart from "../pages/Cart";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
       {
         path: "/tours-list/details/:id",
         element: <TourDetails />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
   },
