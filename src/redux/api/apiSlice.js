@@ -30,11 +30,14 @@ const api = createApi({
         getAllTourList: builder.query({
             query: ({ countryId, cityId, sortBy, categoryIds, minPrice, MaxPrice }) => `/api/tours/list?category_id=&city_id=${cityId}&category_ids=[${categoryIds}]&country_id=${countryId}&min_price=${minPrice}&max_price=${MaxPrice}&sort_by=${sortBy}`,
         }),
+        getSingleTour: builder.query({
+            query: ({ tourId }) => `/api/tours/${tourId}`,
+        }),
         getCategories: builder.query({
             query: () => '/api/categories/list',
         }),
     })
 })
 
-export const { useGetToursQuery, useGetAllCountryQuery, useGetCitiesByCountryQuery, useGetAllTourListQuery, useGetCategoriesQuery, useCreateUserMutation, useUserLogInMutation } = api;
+export const { useGetToursQuery, useGetAllCountryQuery, useGetCitiesByCountryQuery, useGetAllTourListQuery, useGetSingleTourQuery, useGetCategoriesQuery, useCreateUserMutation, useUserLogInMutation } = api;
 export default api;

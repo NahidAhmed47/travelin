@@ -5,13 +5,22 @@ import OurPartners from "../components/common/OurPartners";
 import TourDayCollapse from "../components/TourDayCollapse";
 import BlogCmntBox from "../components/BlogCmntBox";
 import MakeBookingCntn from "../components/MakeBookingCntn";
+import { useParams } from "react-router-dom";
+import { useGetSingleTourQuery } from "../redux/api/apiSlice";
+import Loader from "../components/global/Loader";
 
 const TourDetails = () => {
+  const tourId = useParams()?.id;
+  const { data, isLoading } = useGetSingleTourQuery({ tourId });
+  if (isLoading) return <Loader />;
+  const tour = data?.data;
+  console.log(tour);
+  const { description_en, id, title_en } = tour;
   return (
     <div>
       <section
         className="breadcrumb-main pb-20 pt-14"
-        style={{ backgroundImage: "url(/</div>images/bg/bg1.jpg)" }}
+        style={{ backgroundImage: "url(/images/bg/bg1.jpg)" }}
       >
         <PageBanner path={"Tour Single"} />
       </section>
@@ -24,7 +33,7 @@ const TourDetails = () => {
                   <div className="single-full-title border-b mb-2 pb-2">
                     <div className="single-title">
                       <h2 className="mb-1">
-                        Adriatic Adventure–Zagreb to Athens
+                        {title_en} 
                       </h2>
                       <div className="rating-main d-lg-flex align-items-center text-lg-start text-center">
                         <p className="mb-0 me-2">

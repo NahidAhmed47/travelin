@@ -5,7 +5,6 @@ import durationType from "../fake-data/durationType";
 import TourListCard from "../components/TourListCard";
 import ExploreYourLife from "../components/common/ExploreYourLife";
 import OurPartners from "../components/common/OurPartners";
-import RelatedDesCard from "../components/RelatedDesCard";
 import {
   useGetAllTourListQuery,
   useGetCategoriesQuery,
