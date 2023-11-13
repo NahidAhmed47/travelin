@@ -1,8 +1,33 @@
 import React from "react";
-import RelatedDesCard from "./RelatedDesCard";
 import RelatedDesContainer from "./common/RelatedDesContainer";
+import Cookies from "js-cookie";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const MakeBookingCntn = () => {
+  const token = Cookies.get("access_token_web_tours");
+  const { user } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+  const handleBookTour = (e) => {
+    e.preventDefault();
+
+    if (!token || !user) {
+      Swal.fire({
+        title: "Please login to book tour!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Login",
+        cancelButtonText: "Later",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+    }
+  };
   return (
     <div className="col-lg-4 ps-lg-4">
       <div className="sidebar-sticky">
@@ -73,7 +98,9 @@ const MakeBookingCntn = () => {
                 </div>
                 <div className="col-lg-12">
                   <div className="form-group mb-0">
-                    <button className="nir-btn w-100">Book Now</button>
+                    <button className="nir-btn w-100" onClick={handleBookTour}>
+                      Book Now
+                    </button>
                   </div>
                 </div>
               </div>
@@ -118,7 +145,7 @@ const MakeBookingCntn = () => {
 
           <div className="sidebar-item">
             <h3>Related Destinations</h3>
-            <RelatedDesContainer relatedDestination={[1,2]}/>
+            <RelatedDesContainer relatedDestination={[1, 2]} />
           </div>
         </div>
       </div>

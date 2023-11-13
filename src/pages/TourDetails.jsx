@@ -14,8 +14,7 @@ const TourDetails = () => {
   const { data, isLoading } = useGetSingleTourQuery({ tourId });
   if (isLoading) return <Loader />;
   const tour = data?.data;
-  console.log(tour);
-  const { description_en, id, title_en } = tour;
+  const { description_en, id, title_en, duration, max_guests_no } = tour;
   return (
     <div>
       <section
@@ -32,9 +31,7 @@ const TourDetails = () => {
                 <div className="single-content">
                   <div className="single-full-title border-b mb-2 pb-2">
                     <div className="single-title">
-                      <h2 className="mb-1">
-                        {title_en} 
-                      </h2>
+                      <h2 className="mb-1">{title_en}</h2>
                       <div className="rating-main d-lg-flex align-items-center text-lg-start text-center">
                         <p className="mb-0 me-2">
                           <i className="icon-location-pin"></i> Greater London,
@@ -118,22 +115,13 @@ const TourDetails = () => {
 
                   <div className="description mb-2">
                     <h4>Description</h4>
-                    <p>
-                      Lorem ipsum, or lipsum as it is sometimes known, is dummy
-                      text used in laying out print, graphic or web designs. The
-                      passage is attributed to an unknown typesetter in the 15th
-                      century who is thought to have scrambled parts of
-                      Cicero&apos;s De Finibus Bonorum et Malorum for use in a
-                      type specimen book.Lorem ipsum, or lipsum as it is
-                      sometimes known, is dummy text used in laying out print,
-                      graphic or web designs.
-                    </p>
-                    <p className="mb-0">
+                    <p>{description_en}</p>
+                    {/* <p className="mb-0">
                       The passage is attributed to an unknown typesetter in the
                       15th century who is thought to have scrambled parts of
                       Cicero&apos;s De Finibus Bonorum et Malorum for use in a
                       type specimen book.
-                    </p>
+                    </p> */}
                   </div>
 
                   <div className="tour-includes mb-4">
@@ -145,14 +133,14 @@ const TourDetails = () => {
                               className="fa fa-clock-o pink mr-1"
                               aria-hidden="true"
                             ></i>{" "}
-                            5 Days
+                            {duration} Days
                           </td>
                           <td>
                             <i
                               className="fa fa-group pink mr-1"
                               aria-hidden="true"
                             ></i>{" "}
-                            Max People : 26
+                            Max People : {max_guests_no}
                           </td>
                           <td>
                             <i
