@@ -36,8 +36,8 @@ const Home = () => {
     setSelectedCountry(id);
     dispatch(setCountryId(id));
   };
-  const handleSelectCity = (e) => {
-    dispatch(setCityId(e.target.value));
+  const handleSelectCity = (id) => {
+    dispatch(setCityId(id));
   };
   return (
     <div style={{ backgroundImage: "url(/images/bg/bg1.jpg)" }}>
@@ -89,7 +89,7 @@ const Home = () => {
                             <div className="form-group">
                               <div className="input-box">
                                 <label className="white">City</label>
-                                <select
+                                {/* <select
                                   className="niceSelect"
                                   onChange={handleSelectCity}
                                 >
@@ -101,7 +101,12 @@ const Home = () => {
                                       {city?.name}
                                     </option>
                                   ))}
-                                </select>
+                                </select> */}
+                                <DropdownMenu
+                                  selectedTxt={"Select City"}
+                                  data={cities}
+                                  handleSelect={handleSelectCity}
+                                />
                               </div>
                             </div>
                           </div>
