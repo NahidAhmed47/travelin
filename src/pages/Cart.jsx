@@ -1,7 +1,19 @@
 import React from "react";
 import PageBanner from "../components/common/PageBanner";
+import { useSelector } from "react-redux";
+import Swal from "sweetalert2";
+import { redirect } from "react-router-dom";
 
 const Cart = () => {
+  const { user } = useSelector((state) => state.user);
+  if (!user) {
+    Swal.fire({
+      title: "You are not authorized to access this page!",
+      icon: "warning",
+    });
+    redirect("/login");
+    return;
+  }
   return (
     <div>
       <section

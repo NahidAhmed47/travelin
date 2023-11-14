@@ -45,20 +45,20 @@ const MakeBookingCntn = ({ tour }) => {
       date: formattedDate,
       vehicle_id: 0,
     };
-    // console.log(cart);
+    console.log(cart);
     // const res = await addCart({ data: cart, token });
     // console.log(res);
-    Swal.fire({
-      title: "Yay! Cart added successfully!",
-      icon: "success",
-      showCancelButton: false,
-      confirmButtonColor: "#3085d6",
-      confirmButtonText: "Go to cart",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        navigate(`/cart?u_id=${user?.id}`);
-      }
-    });
+    // Swal.fire({
+    //   title: "Yay! Cart added successfully!",
+    //   icon: "success",
+    //   showCancelButton: false,
+    //   confirmButtonColor: "#3085d6",
+    //   confirmButtonText: "Go to cart",
+    // }).then((result) => {
+    //   if (result.isConfirmed) {
+    //     navigate(`/cart?u_id=${user?.id}`);
+    //   }
+    // });
   };
   return (
     <div className="col-lg-4 ps-lg-4">

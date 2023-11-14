@@ -157,6 +157,20 @@ const Header = () => {
                         Tours List
                       </NavLink>
                     </div>
+                    {token && (
+                      <div className="nav-menu-item">
+                        <NavLink
+                          to={"/cart"}
+                          className={({ isActive }) =>
+                            isActive
+                              ? "nav-menu-item-active"
+                              : "nav-menu-item-unactive"
+                          }
+                        >
+                          My Cart
+                        </NavLink>
+                      </div>
+                    )}
                   </div>
                   <div className="register-login d-flex align-items-center">
                     {token ? (
@@ -204,7 +218,7 @@ const Header = () => {
 
               {currentWidth < 990 && menuOpen && (
                 <div className="menu-container-mobile">
-                  <div className="nav-menu-container-mobile">
+                  <div onClick={() => setMenuOpen(false)} className="nav-menu-container-mobile">
                     <div className="nav-menu-item-mobile">
                       <NavLink
                         to={"/"}
@@ -229,6 +243,20 @@ const Header = () => {
                         Tours List
                       </NavLink>
                     </div>
+                    {token && (
+                      <div className="nav-menu-item">
+                        <NavLink
+                          to={"/cart"}
+                          className={({ isActive }) =>
+                            isActive
+                              ? "nav-menu-item-active"
+                              : "nav-menu-item-unactive"
+                          }
+                        >
+                          My Cart
+                        </NavLink>
+                      </div>
+                    )}
                     <div className="register-login-mobile">
                       {token ? (
                         <div
