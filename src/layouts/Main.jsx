@@ -11,6 +11,7 @@ const Main = () => {
   useEffect(() => {
     document.documentElement.lang = lngMode;
     document.documentElement.dir = lngMode === "en" ? "ltr" : "rtl";
+    localStorage.setItem("lngMode", lngMode);
   }, [lngMode]);
   return (
     <div>

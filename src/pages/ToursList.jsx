@@ -28,6 +28,7 @@ const ToursList = () => {
   const [title, setTitle] = useState("Sort By");
   const dispatch = useDispatch();
   const { countryId, cityId } = useSelector((state) => state.search);
+  const { lngMode } = useSelector((state) => state.lngMode);
   const { categoryIds, sortBy, minPrice, maxPrice } = useSelector(
     (state) => state.filter
   );
@@ -42,7 +43,16 @@ const ToursList = () => {
   const { data: categoriesData } = useGetCategoriesQuery();
   useEffect(() => {
     refetch();
-  }, [categoryIds, sortBy, minPrice, maxPrice, countryId, cityId, refetch]);
+  }, [
+    categoryIds,
+    sortBy,
+    minPrice,
+    maxPrice,
+    countryId,
+    cityId,
+    lngMode,
+    refetch,
+  ]);
   if (isLoading) return <Loader />;
   const toursList = data?.data;
   const categories = categoriesData?.data;

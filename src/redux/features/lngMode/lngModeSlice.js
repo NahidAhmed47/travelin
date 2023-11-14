@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const lngModeSlice = createSlice({
     name: 'lngMode',
     initialState: {
-        lngMode: 'en',
+        lngMode: localStorage.getItem('lngMode') || 'en',
     },
     reducers: {
         setLngMode: (state, action) => {
