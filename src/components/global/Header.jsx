@@ -11,11 +11,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../redux/features/user/userSlice";
 import Swal from "sweetalert2";
 import LngMode from "./LngMode";
+import headerContent from "../../web-content/header";
 
 const Header = () => {
   const [token, setToken] = useState(null);
   const [currentWidth, setCurrentWidth] = useState(window.innerWidth);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { lngMode } = useSelector((state) => state.lngMode);
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -43,24 +45,33 @@ const Header = () => {
       timer: 1500,
     });
   };
+  // header content
+  const { subNav, nav } = headerContent;
+  console.log(nav);
   return (
     <header className="main_header_area">
-      <div className="header-content py-1   bg-theme" style={{zIndex: 9999999}}>
+      <div
+        className="header-content py-1   bg-theme"
+        style={{ zIndex: 9999999 }}
+      >
         <div className="container d-flex align-items-center justify-content-between ">
           <ul className="h-100 m-0">
             <li className="">
               <a href="#" className="white">
-                <FontAwesomeIcon icon={faCalendarDays} /> Thursday, Mar 26, 2021
+                <FontAwesomeIcon icon={faCalendarDays} />{" "}
+                {lngMode == "en" ? subNav?.date?.en : subNav?.date?.ar}
               </a>
             </li>
             <li>
               <a href="#" className="white">
-                <FontAwesomeIcon icon={faLocationDot} /> Hollywood, America
+                <FontAwesomeIcon icon={faLocationDot} />{" "}
+                {lngMode == "en" ? subNav?.location?.en : subNav?.location?.ar}
               </a>
             </li>
             <li>
               <a href="#" className="white">
-                <FontAwesomeIcon icon={faClock} /> Mon-Fri: 10 AM – 5 PM
+                <FontAwesomeIcon icon={faClock} />{" "}
+                {lngMode == "en" ? subNav?.OpenTime?.en : subNav?.OpenTime?.ar}
               </a>
             </li>
           </ul>
@@ -146,7 +157,7 @@ const Header = () => {
                             : "nav-menu-item-unactive"
                         }
                       >
-                        Home
+                        {lngMode == "en" ? nav?.home?.en : nav?.home?.ar}
                       </NavLink>
                     </div>
                     <div className="nav-menu-item">
@@ -158,7 +169,9 @@ const Header = () => {
                             : "nav-menu-item-unactive"
                         }
                       >
-                        Tours List
+                        {lngMode == "en"
+                          ? nav?.tours_list?.en
+                          : nav?.tours_list?.ar}
                       </NavLink>
                     </div>
                     {token && (
@@ -171,7 +184,9 @@ const Header = () => {
                               : "nav-menu-item-unactive"
                           }
                         >
-                          My Cart
+                          {lngMode == "en"
+                            ? nav?.my_cart?.en
+                            : nav?.my_cart?.ar}
                         </NavLink>
                       </div>
                     )}
@@ -190,7 +205,7 @@ const Header = () => {
                         >
                           <path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z" />
                         </svg>{" "}
-                        LogOut
+                        {lngMode == "en" ? nav?.logout?.en : nav?.logout?.ar}
                       </div>
                     ) : (
                       <NavLink
@@ -209,11 +224,13 @@ const Header = () => {
                         >
                           <path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z" />
                         </svg>{" "}
-                        Login/Register
+                        {lngMode == "en"
+                          ? nav?.login_register?.en
+                          : nav?.login_register?.ar}
                       </NavLink>
                     )}
                     <Link to="/" className="nir-btn white book-now-btn">
-                      Book Now
+                      {lngMode == "en" ? nav?.book_now?.en : nav?.book_now?.ar}
                     </Link>
                   </div>
                 </>
