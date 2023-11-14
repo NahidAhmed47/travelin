@@ -10,6 +10,7 @@ import Cookies from "js-cookie";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../redux/features/user/userSlice";
 import Swal from "sweetalert2";
+import LngMode from "./LngMode";
 
 const Header = () => {
   const [token, setToken] = useState(null);
@@ -44,7 +45,7 @@ const Header = () => {
   };
   return (
     <header className="main_header_area">
-      <div className="header-content py-1   bg-theme">
+      <div className="header-content py-1   bg-theme" style={{zIndex: 9999999}}>
         <div className="container d-flex align-items-center justify-content-between ">
           <ul className="h-100 m-0">
             <li className="">
@@ -64,6 +65,9 @@ const Header = () => {
             </li>
           </ul>
           <ul className="m-0 float-right">
+            <li>
+              <LngMode />
+            </li>
             <li>
               <a href="#" className="white">
                 <svg
@@ -218,7 +222,10 @@ const Header = () => {
 
               {currentWidth < 990 && menuOpen && (
                 <div className="menu-container-mobile">
-                  <div onClick={() => setMenuOpen(false)} className="nav-menu-container-mobile">
+                  <div
+                    onClick={() => setMenuOpen(false)}
+                    className="nav-menu-container-mobile"
+                  >
                     <div className="nav-menu-item-mobile">
                       <NavLink
                         to={"/"}
