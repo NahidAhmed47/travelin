@@ -26,7 +26,7 @@ const PageBanner = ({ path }) => {
                 <li className="breadcrumb-item">
                   <Link to={"/"}
                     style={{
-                      color: "#029e9d",
+                      color: "#242958",
                       fontWeight: "500",
                       fontFamily: "poppins",
                       cursor: "pointer",

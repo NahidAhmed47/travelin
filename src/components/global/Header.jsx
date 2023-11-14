@@ -191,7 +191,10 @@ const Header = () => {
                       </div>
                     )}
                   </div>
-                  <div className="register-login d-flex align-items-center">
+                  <div
+                    className="register-login d-flex align-items-center"
+                    style={{ gap: `${lngMode == "ar" ? "10px" : "0px"}` }}
+                  >
                     {token ? (
                       <div
                         onClick={handleLogOut}
@@ -235,6 +238,7 @@ const Header = () => {
                   </div>
                 </>
               )}
+
               {/* menu bar icon */}
 
               {currentWidth < 990 && menuOpen && (
