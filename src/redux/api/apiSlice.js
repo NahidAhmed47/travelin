@@ -41,7 +41,7 @@ const api = createApi({
                 url: '/api/carts/add',
                 method: 'POST',
                 headers: {
-                    Authorization: `31|wKzgtIFk7bifxQxxBeUeXJV0C8R3CzZYeBP99DyS6d799cb6`,
+                    Authorization: `${token}`,
                 },
                 body: data,
             }),

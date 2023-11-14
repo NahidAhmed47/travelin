@@ -25,7 +25,7 @@ const Cart = () => {
       <section className="trending pt-6 pb-0 bg-lgrey">
         <div className="container">
           <div className="row">
-            <div className="col-lg-8 col-xs-12 mb-4">
+            <div className="w-100 mb-4">
               <div className="payment-book">
                 <div className="booking-box">
                   {/* <div className="booking-box-title d-md-flex align-items-center bg-title p-4 mb-4 rounded text-md-start text-center">
@@ -125,62 +125,7 @@ const Cart = () => {
               </div>
             </div>
 
-            <div className="col-lg-4 col-xs-12 mb-4 ps-4">
-              <div className="sidebar-sticky">
-                <div className="list-sidebar">
-                  <div className="sidebar-item bordernone bg-white rounded box-shadow overflow-hidden p-3 mb-4">
-                    <h4>Need Booking Help?</h4>
-                    <div className="sidebar-module-inner">
-                      <p className="mb-2">
-                        Paid was hill sir high 24/7. For him precaution any
-                        advantages dissimilar.
-                      </p>
-                      <ul className="help-list">
-                        <li className="border-b pb-1 mb-1">
-                          <span className="font-weight-bold">Hotline</span>:
-                          +475 15 123 21
-                        </li>
-                        <li className="border-b pb-1 mb-1">
-                          <span className="font-weight-bold">Email</span>:
-                          support@Yatriiworld.com
-                        </li>
-                        <li>
-                          <span className="font-weight-bold">Livechat</span>:
-                          Yatriiworld (Skype)
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div className="sidebar-item bg-white rounded box-shadow overflow-hidden p-3 mb-4">
-                    <h4>Why booking with us?</h4>
-                    <div className="sidebar-module-inner">
-                      <ul className="featured-list-sm">
-                        <li className="border-b pb-2 mb-2">
-                          <h6 className="mb-0">No Booking Charges</h6>
-                          We don&apos;t charge you an extra fee for booking a
-                          hotel room with us
-                        </li>
-                        <li className="border-b pb-2 mb-2">
-                          <h6 className="mb-0">No Cancellation Sees</h6>
-                          We don&apos;t charge you a cancellation or
-                          modification fee in case plans change
-                        </li>
-                        <li className="border-b pb-2 mb-2">
-                          <h6 className="mb-0">Instant Confirmation</h6>
-                          Instant booking confirmation whether booking online or
-                          via the telephone
-                        </li>
-                        <li>
-                          <h6 className="mb-0">Flexible Booking</h6>
-                          You can book up to a whole year in advance or right up
-                          until the moment of your stay
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            
           </div>
         </div>
       </section>

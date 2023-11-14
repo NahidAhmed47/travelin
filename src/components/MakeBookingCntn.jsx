@@ -46,8 +46,8 @@ const MakeBookingCntn = ({ tour }) => {
       vehicle_id: 0,
     };
     console.log(cart);
-    // const res = await addCart({ data: cart, token });
-    // console.log(res);
+    const res = await addCart({ data: cart, token });
+    console.log(res);
     // Swal.fire({
     //   title: "Yay! Cart added successfully!",
     //   icon: "success",

@@ -14,7 +14,7 @@ const TourDetails = () => {
   const { data, isLoading } = useGetSingleTourQuery({ tourId });
   if (isLoading) return <Loader />;
   const tour = data?.data;
-  const { description_en, id, title_en, duration, max_guests_no } = tour;
+  const { description_en = "", id, title_en, duration, max_guests_no } = tour;
   return (
     <div>
       <section
