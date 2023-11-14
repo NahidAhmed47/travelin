@@ -38,6 +38,7 @@ const Header = () => {
     Cookies.remove("access_token_web_tours");
     localStorage.removeItem("user");
     dispatch(setUser(null));
+    setMenuOpen(false);
     Swal.fire({
       icon: "success",
       title: "Logout Success!",
@@ -47,7 +48,6 @@ const Header = () => {
   };
   // header content
   const { subNav, nav } = headerContent;
-  console.log(nav);
   return (
     <header className="main_header_area">
       <div
@@ -243,11 +243,11 @@ const Header = () => {
 
               {currentWidth < 990 && menuOpen && (
                 <div className="menu-container-mobile">
-                  <div
-                    onClick={() => setMenuOpen(false)}
-                    className="nav-menu-container-mobile"
-                  >
-                    <div className="nav-menu-item-mobile">
+                  <div className="nav-menu-container-mobile">
+                    <div
+                      className="nav-menu-item-mobile"
+                      onClick={() => setMenuOpen(false)}
+                    >
                       <NavLink
                         to={"/"}
                         className={({ isActive }) =>
@@ -256,10 +256,13 @@ const Header = () => {
                             : "nav-menu-item-unactive"
                         }
                       >
-                        Home
+                        {lngMode == "en" ? nav?.home?.en : nav?.home?.ar}
                       </NavLink>
                     </div>
-                    <div className="nav-menu-item-mobile">
+                    <div
+                      className="nav-menu-item-mobile"
+                      onClick={() => setMenuOpen(false)}
+                    >
                       <NavLink
                         to={"/tours-list"}
                         className={({ isActive }) =>
@@ -268,11 +271,16 @@ const Header = () => {
                             : "nav-menu-item-unactive"
                         }
                       >
-                        Tours List
+                        {lngMode == "en"
+                          ? nav?.tours_list?.en
+                          : nav?.tours_list?.ar}
                       </NavLink>
                     </div>
                     {token && (
-                      <div className="nav-menu-item">
+                      <div
+                        className="nav-menu-item"
+                        onClick={() => setMenuOpen(false)}
+                      >
                         <NavLink
                           to={"/cart"}
                           className={({ isActive }) =>
@@ -281,7 +289,9 @@ const Header = () => {
                               : "nav-menu-item-unactive"
                           }
                         >
-                          My Cart
+                          {lngMode == "en"
+                            ? nav?.my_cart?.en
+                            : nav?.my_cart?.ar}
                         </NavLink>
                       </div>
                     )}
@@ -299,7 +309,7 @@ const Header = () => {
                           >
                             <path d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z" />
                           </svg>{" "}
-                          LogOut
+                          {lngMode == "en" ? nav?.logout?.en : nav?.logout?.ar}
                         </div>
                       ) : (
                         <NavLink
@@ -310,17 +320,27 @@ const Header = () => {
                               : "nav-menu-login me-3"
                           }
                         >
-                          Login/Register
+                          {lngMode == "en"
+                          ? nav?.login_register?.en
+                          : nav?.login_register?.ar}
                         </NavLink>
                       )}
-                      <Link to="/" className="nir-btn white book-now-btn mt-3">
-                        Book Now
-                      </Link>
+
+                      <div className="" style={{ marginTop: "20px" }}>
+                        <LngMode />
+                      </div>
+                      <div onClick={() => setMenuOpen(false)}>
+                        <Link
+                          to="/"
+                          className="nir-btn white book-now-btn mt-3"
+                        >
+                           {lngMode == "en" ? nav?.book_now?.en : nav?.book_now?.ar}
+                        </Link>
+                      </div>
                     </div>
                   </div>
                 </div>
               )}
-              {/* <div id="slicknav-mobile"></div> */}
               {menuOpen
                 ? currentWidth < 990 && (
                     <div onClick={() => setMenuOpen(!menuOpen)}>

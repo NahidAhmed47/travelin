@@ -58,7 +58,7 @@ const ToursList = () => {
     //     })
     //   );
     // }
-    if(value === "srt"){
+    if (value === "srt") {
       dispatch(setSortBy(""));
     }
     if (value == "lth") {
@@ -128,14 +128,6 @@ const ToursList = () => {
                       <i className="fa fa-th rounded"></i>
                     </div>
                   </div>
-                  {/* <div className="sortby d-flex align-items-center justify-content-between ml-2">
-                    <select className="niceSelect" onChange={handleSortFilter}>
-                      <option value="reset">Sort By</option>
-                      <option value="avgRating">Average rating</option>
-                      <option value="lth">Price: low to high</option>
-                      <option value="htl">Price: high to low</option>
-                    </select>
-                  </div> */}
                   <div
                     className="select-box "
                     onClick={() => setOpenDropdown(!openDropdown)}
@@ -149,7 +141,13 @@ const ToursList = () => {
                     </div>
                     {openDropdown && (
                       <div className="dropdown-option-box">
-                        <p onClick={() => (setTitle("Sort By"), handleSortFilter("srt"))}>Sort By</p>
+                        <p
+                          onClick={() => (
+                            setTitle("Sort By"), handleSortFilter("srt")
+                          )}
+                        >
+                          Sort By
+                        </p>
                         <p
                           onClick={() => (
                             setTitle("Price: Low to High"),
