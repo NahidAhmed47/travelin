@@ -1,6 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import sectionsContent from "../../web-content/sectionsContent";
 
 const ExploreYourLife = () => {
+  const { lngMode } = useSelector((state) => state.lngMode);
+  const { exploreYLife } = sectionsContent;
   return (
     <section
       className="discount-action pt-0"
@@ -14,16 +18,28 @@ const ExploreYourLife = () => {
           <div className="call-banner-inner w-75 mx-auto text-center px-5">
             <div className="trend-content-main">
               <div className="trend-content mb-5 pb-2 px-5">
-                <h5 className="mb-1 theme">Love Where Your&apos;re Going</h5>
+                <h5 className="mb-1 theme">
+                  {lngMode == "en"
+                    ? exploreYLife?.subTitle?.en
+                    : exploreYLife?.subTitle?.ar}
+                </h5>
                 <h2>
                   <a href="detail-fullwidth.html">
-                    Explore Your Life,{" "}
-                    <span className="theme1"> Travel Where You Want!</span>
+                    {lngMode == "en"
+                      ? exploreYLife?.title1?.en
+                      : exploreYLife?.title1?.ar}
+                    <span className="theme1">
+                      {" "}
+                      {lngMode == "en"
+                        ? exploreYLife?.title2.en
+                        : exploreYLife?.title2?.ar}
+                    </span>
                   </a>
                 </h2>
                 <p>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  {lngMode == "en"
+                    ? exploreYLife?.description?.en
+                    : exploreYLife?.description?.ar}
                 </p>
               </div>
               <div className="video-button text-center position-relative">

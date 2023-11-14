@@ -1,9 +1,11 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const TourGridCard = ({ tour }) => {
-  const { id, title_en, price, duration, description_en, images } = tour;
+  const { id, title, price, duration, description, images } = tour;
   console.log(tour);
+  const { lngMode } = useSelector((state) => state.lngMode);
   const navigate = useNavigate();
   const handleTourDetails = (id) => {
     navigate(`/tours-list/details/${id}`);
@@ -27,13 +29,16 @@ const TourGridCard = ({ tour }) => {
           <div className="trend-meta bg-theme white px-3 py-2 rounded">
             <div className="entry-author">
               <i className="icon-calendar"></i>
-              <span className="fw-bold"> {duration} Days Tours</span>
+              <span className="fw-bold">
+                {" "}
+                {duration} {lngMode == "en" ? "Days Tours" : "جولات الأيام"}
+              </span>
             </div>
           </div>
           <h5 className="theme mb-1">
             <i className="flaticon-location-pin"></i> Croatia
           </h5>
-          <h3 className="mb-1">{title_en}</h3>
+          <h3 className="mb-1">{title}</h3>
           <div className="rating-main d-flex align-items-center pb-2">
             <div className="rating">
               <span className="fa fa-star checked"></span>
@@ -48,7 +53,7 @@ const TourGridCard = ({ tour }) => {
             className=" border-b pb-2 mb-2"
             id="description-field"
             style={{ maxHeight: "100px", overflow: "hidden", width: "100%" }}
-            dangerouslySetInnerHTML={{ __html: description_en }}
+            dangerouslySetInnerHTML={{ __html: description }}
           ></div>
           <div className="entry-meta">
             <div className="entry-author d-flex align-items-center">
@@ -57,7 +62,7 @@ const TourGridCard = ({ tour }) => {
                   {" "}
                   ${Number.isInteger(price) ? price + ".00" : price}
                 </span>{" "}
-                | Per person
+                | {lngMode == "en" ? "Per Person" : "للشخص الواحد"}
               </p>
             </div>
           </div>

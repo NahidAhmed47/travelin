@@ -1,7 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const PageBanner = ({ path }) => {
+  const { lngMode } = useSelector((state) => state.lngMode);
   return (
     <>
       <div
@@ -23,8 +25,12 @@ const PageBanner = ({ path }) => {
               }}
             >
               <ul className="breadcrumb ">
-                <li className="breadcrumb-item">
-                  <Link to={"/"}
+                <li
+                  className="breadcrumb-item"
+                  style={{ paddingLeft: `${lngMode == "ar" ? "10px" : "0px"}` }}
+                >
+                  <Link
+                    to={"/"}
                     style={{
                       color: "#242958",
                       fontWeight: "500",
@@ -32,7 +38,7 @@ const PageBanner = ({ path }) => {
                       cursor: "pointer",
                     }}
                   >
-                    Home
+                    {lngMode == "en" ? "Home" : "بيت"}
                   </Link>
                 </li>
                 <li

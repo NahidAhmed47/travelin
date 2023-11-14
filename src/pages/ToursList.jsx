@@ -25,10 +25,10 @@ import ReactSlider from "react-slider";
 const ToursList = () => {
   const [listViewOpen, setListViewOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(false);
-  const [title, setTitle] = useState("Sort By");
+  const { lngMode } = useSelector((state) => state.lngMode);
+  const [title, setTitle] = useState(lngMode == "en" ? "Sort By" : "ترتيب حسب");
   const dispatch = useDispatch();
   const { countryId, cityId } = useSelector((state) => state.search);
-  const { lngMode } = useSelector((state) => state.lngMode);
   const { categoryIds, sortBy, minPrice, maxPrice } = useSelector(
     (state) => state.filter
   );
@@ -43,6 +43,7 @@ const ToursList = () => {
   const { data: categoriesData } = useGetCategoriesQuery();
   useEffect(() => {
     refetch();
+    setTitle(lngMode == "en" ? "Sort By" : "ترتيب حسب");
   }, [
     categoryIds,
     sortBy,
@@ -55,8 +56,8 @@ const ToursList = () => {
   ]);
   if (isLoading) return <Loader />;
   const toursList = data?.data;
-  const categories = categoriesData?.data;
   // handle sort filter
+  const categories = categoriesData?.data;
   const handleSortFilter = (value) => {
     // if (value === "reset") {
     //   dispatch(
@@ -102,7 +103,7 @@ const ToursList = () => {
         className="breadcrumb-main pb-20 pt-14"
         style={{ backgroundImage: "url(/images/bg/bg1.jpg)" }}
       >
-        <PageBanner path={"Tour Grid"} />
+        <PageBanner path={lngMode == "en" ? "Tours List" : "قائمة الجولات"} />
       </section>
       {/* <!-- BreadCrumb Ends -->  */}
 
@@ -113,7 +114,11 @@ const ToursList = () => {
             <div className="col-lg-8">
               <div className="list-results d-flex align-items-center justify-content-between">
                 <div className="list-results-sort">
-                  <p className="m-0">Showing 1-5 of 80 results</p>
+                  <p className="m-0">
+                    {lngMode == "en" ? "Showing" : "عرض"} {toursList?.length}{" "}
+                    {lngMode == "en" ? "of" : "ل"} {toursList?.length}{" "}
+                    {lngMode == "en" ? "Results" : "نتائج"}
+                  </p>
                 </div>
                 <div className="click-menu d-flex align-items-center justify-content-between">
                   <div
@@ -132,7 +137,10 @@ const ToursList = () => {
                     className={`change-grid  me-2 ${
                       listViewOpen || "f-active"
                     }`}
-                    style={{ cursor: "pointer" }}
+                    style={{
+                      cursor: "pointer",
+                      marginLeft: `${lngMode == "en" ? "0px" : "15px"}`,
+                    }}
                   >
                     <div>
                       <i className="fa fa-th rounded"></i>
@@ -156,7 +164,7 @@ const ToursList = () => {
                             setTitle("Sort By"), handleSortFilter("srt")
                           )}
                         >
-                          Sort By
+                          {lngMode == "en" ? "Sort By" : "ترتيب حسب"}
                         </p>
                         <p
                           onClick={() => (
@@ -164,7 +172,9 @@ const ToursList = () => {
                             handleSortFilter("lth")
                           )}
                         >
-                          Price: Low to High
+                          {lngMode == "en"
+                            ? "Price: Low to High"
+                            : "السعر: من الأقل إلى الأعلى"}
                         </p>
                         <p
                           onClick={() => (
@@ -172,7 +182,9 @@ const ToursList = () => {
                             handleSortFilter("htl")
                           )}
                         >
-                          Price: High to Low
+                          {lngMode == "en"
+                            ? "Price: High to Low"
+                            : "السعر: من الأعلى إلى الأقل"}
                         </p>
                       </div>
                     )}
@@ -187,7 +199,11 @@ const ToursList = () => {
                   ))}
                   {toursList?.length === 0 && (
                     <div className="no-tour-found">
-                      <i>No tour found!</i>
+                      <i>
+                        {lngMode == "en"
+                          ? "No tour found!"
+                          : "لم يتم العثور على جولة!"}
+                      </i>
                     </div>
                   )}
                   {toursList?.length > 6 && (
@@ -229,7 +245,9 @@ const ToursList = () => {
               <div className="sidebar-sticky">
                 <div className="list-sidebar">
                   <div className="sidebar-item mb-4">
-                    <h3 className="">Categories Type</h3>
+                    <h3 className="">
+                      {lngMode == "en" ? "Categories Type" : "نوع الفئات"}
+                    </h3>
                     <ul className="sidebar-category1">
                       {categories?.map((category, index) => (
                         <li key={index}>
@@ -239,7 +257,7 @@ const ToursList = () => {
                               handleSelectCategory(JSON.stringify(category?.id))
                             }
                           />{" "}
-                          {category?.name_en}
+                          {category?.name}
                           <span className="float-end">
                             {category?.totalItem}
                           </span>
@@ -249,7 +267,9 @@ const ToursList = () => {
                   </div>
 
                   <div className="sidebar-item mb-4">
-                    <h3 className="">Duration Type</h3>
+                    <h3 className="">
+                      {lngMode == "en" ? "Duration Type" : "نوع المدة"}
+                    </h3>
                     <ul className="sidebar-category1">
                       {durationType?.map((duration, index) => (
                         <li key={index}>
@@ -286,7 +306,11 @@ const ToursList = () => {
                   </div>
 
                   <div className="sidebar-item">
-                    <h3>Related Destinations</h3>
+                    <h3>
+                      {lngMode == "en"
+                        ? "Related Destinations"
+                        : "الوجهات ذات الصلة"}
+                    </h3>
                     <RelatedDesContainer
                       relatedDestination={data?.related_cities}
                     />
