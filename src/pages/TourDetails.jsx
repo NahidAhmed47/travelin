@@ -8,20 +8,22 @@ import MakeBookingCntn from "../components/MakeBookingCntn";
 import { useParams } from "react-router-dom";
 import { useGetSingleTourQuery } from "../redux/api/apiSlice";
 import Loader from "../components/global/Loader";
+import { useSelector } from "react-redux";
 
 const TourDetails = () => {
   const tourId = useParams()?.id;
   const { data, isLoading } = useGetSingleTourQuery({ tourId });
+  const { lngMode } = useSelector((state) => state.lngMode);
   if (isLoading) return <Loader />;
   const tour = data?.data;
-  const { description_en = "", id, title_en, duration, max_guests_no } = tour;
+  const { description = "", id, title, duration, max_guests_no } = tour;
   return (
     <div>
       <section
         className="breadcrumb-main pb-20 pt-14"
         style={{ backgroundImage: "url(/images/bg/bg1.jpg)" }}
       >
-        <PageBanner path={"Tour Single"} />
+        <PageBanner path={lngMode == "en" ? "Tour Details" : "تفاصيل الجولة"} />
       </section>
       <div className="">
         <section className="trending pt-6 pb-0 bg-lgrey">
@@ -31,7 +33,7 @@ const TourDetails = () => {
                 <div className="single-content">
                   <div className="single-full-title border-b mb-2 pb-2">
                     <div className="single-title">
-                      <h2 className="mb-1">{title_en}</h2>
+                      <h2 className="mb-1">{title}</h2>
                       <div className="rating-main d-lg-flex align-items-center text-lg-start text-center">
                         <p className="mb-0 me-2">
                           <i className="icon-location-pin"></i> Greater London,
@@ -114,13 +116,13 @@ const TourDetails = () => {
                   </div>
 
                   <div className="description mb-2">
-                    <h4>Description</h4>
+                    <h4>{lngMode == "en" ? "Description" : "وصف"}</h4>
                     <div
                       id="description-field"
                       style={{
                         width: "100%",
                       }}
-                      dangerouslySetInnerHTML={{ __html: description_en }}
+                      dangerouslySetInnerHTML={{ __html: description }}
                     ></div>
                     {/* <p className="mb-0">
                       The passage is attributed to an unknown typesetter in the
@@ -139,14 +141,15 @@ const TourDetails = () => {
                               className="fa fa-clock-o pink mr-1"
                               aria-hidden="true"
                             ></i>{" "}
-                            {duration} Days
+                            {duration} {lngMode == "en" ? "Days" : "أيام"}
                           </td>
                           <td>
                             <i
                               className="fa fa-group pink mr-1"
                               aria-hidden="true"
                             ></i>{" "}
-                            Max People : {max_guests_no}
+                            {lngMode == "en" ? "Max People" : "ماكس الناس"} :{" "}
+                            {max_guests_no}
                           </td>
                           <td>
                             <i
@@ -162,21 +165,22 @@ const TourDetails = () => {
                               className="fa fa-user pink mr-1"
                               aria-hidden="true"
                             ></i>{" "}
-                            Min Age : 10+
+                            {lngMode == "en" ? "Min Age" : "مين العمر"} : 10+
                           </td>
                           <td>
                             <i
                               className="fa fa-map-signs pink mr-1"
                               aria-hidden="true"
                             ></i>{" "}
-                            Pickup : Airport
+                            {lngMode == "en" ? "Pickup" : "يلتقط"} : Airport
                           </td>
                           <td>
                             <i
                               className="fa fa-file-alt pink mr-1"
                               aria-hidden="true"
                             ></i>{" "}
-                            Langauge - English, Thai
+                            {lngMode == "en" ? "Langauge" : "لغة"} - English,
+                            Thai
                           </td>
                         </tr>
                       </tbody>
@@ -187,7 +191,11 @@ const TourDetails = () => {
                     <div className="row">
                       <div className="col-lg-6 col-md-6 mb-2">
                         <div className="desc-box bg-grey p-4 rounded">
-                          <h5 className="mb-2">Departure & Return Location</h5>
+                          <h5 className="mb-2">
+                            {lngMode == "en"
+                              ? "Departure & Return Location"
+                              : "موقع المغادرة والعودة"}
+                          </h5>
                           <p className="mb-0">
                             John F.K. International Airport(Google Map)
                           </p>

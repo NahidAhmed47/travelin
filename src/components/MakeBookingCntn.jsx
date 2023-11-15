@@ -11,6 +11,7 @@ import { format } from "date-fns";
 import { useAddCartMutation } from "../redux/api/apiSlice";
 
 const MakeBookingCntn = ({ tour }) => {
+  const { lngMode } = useSelector((state) => state.lngMode);
   console.log(tour);
   const [date, onChangeDate] = useState(new Date());
   const token = Cookies.get("access_token_web_tours");
@@ -67,23 +68,29 @@ const MakeBookingCntn = ({ tour }) => {
           <div className="sidebar-item">
             <div className="form-content rounded overflow-hidden bg-title">
               <h4 className="white text-center border-b pb-2">
-                MAKE A BOOKING
+                {lngMode == "en" ? "MAKE A BOOKING" : "القيام بالحجز"}
               </h4>
               <div className="row">
                 <div className="col-lg-12">
                   <div className="form-group">
-                    <span className="white pb-1">Your choosen date is</span>
+                    <span className="white pb-1">
+                      {lngMode == "en"
+                        ? "Your chosen date is"
+                        : "التاريخ الذي اخترته هو"}
+                    </span>
                     <h4 className="choosen-date white mb-0 border-0">
                       <i className="fa fa-calendar"></i> {date?.toDateString()}
                       <small className="d-flex justify-content-between fw-normal w-100 my-2">
-                        ({tour?.duration} days){" "}
+                        ({tour?.duration} {lngMode == "en" ? "days" : "أيام"}){" "}
                       </small>
                     </h4>
                   </div>
                 </div>
                 <div className="col-lg-12">
                   <div className="form-group mb-2">
-                    <label className="white">No. Of People</label>
+                    <label className="white">
+                      {lngMode == "en" ? "No. Of People" : "عدد الأشخاص"}
+                    </label>
                     <div className="input-box">
                       <i className="flaticon-add-user"></i>
                       <select
@@ -98,7 +105,9 @@ const MakeBookingCntn = ({ tour }) => {
                       </select>
                     </div>
                   </div>
-                  <label className="white">Select Date:</label>
+                  <label className="white">
+                    {lngMode == "en" ? "Select Date:" : "حدد تاريخ:"}
+                  </label>
                   <div
                     className=""
                     style={{ height: "60px", marginBottom: "5px" }}

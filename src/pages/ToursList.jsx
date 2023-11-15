@@ -194,7 +194,7 @@ const ToursList = () => {
 
               {listViewOpen || (
                 <div className="row">
-                  {toursList.map((tour, index) => (
+                  {toursList?.map((tour, index) => (
                     <TourGridCard key={index} tour={tour} />
                   ))}
                   {toursList?.length === 0 && (
@@ -285,7 +285,9 @@ const ToursList = () => {
                   <div className="sidebar-item mb-4">
                     <h3 className="">Duration Type</h3>
                     <div className="range-slider mt-0">
-                      <p className="text-start mb-2">Price Range</p>
+                      <p className="text-start mb-2">
+                        {lngMode == "en" ? "Price Range" : "نطاق السعر"}
+                      </p>
                       <ReactSlider
                         className="horizontal-slider"
                         thumbClassName="price-range-thumb"

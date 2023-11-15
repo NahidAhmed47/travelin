@@ -24,7 +24,7 @@ const ExploreYourLife = () => {
                     : exploreYLife?.subTitle?.ar}
                 </h5>
                 <h2>
-                  <a href="detail-fullwidth.html">
+                  <p>
                     {lngMode == "en"
                       ? exploreYLife?.title1?.en
                       : exploreYLife?.title1?.ar}
@@ -34,7 +34,7 @@ const ExploreYourLife = () => {
                         ? exploreYLife?.title2.en
                         : exploreYLife?.title2?.ar}
                     </span>
-                  </a>
+                  </p>
                 </h2>
                 <p>
                   {lngMode == "en"
