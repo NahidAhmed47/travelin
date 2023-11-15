@@ -8766,6 +8766,7 @@ ul.sidebar-tags li a:hover {
   display: flex;
   flex-direction: column;
   gap: 15px;
+  position: relative;
 }
 
 .nav-menu-container-mobile a {
