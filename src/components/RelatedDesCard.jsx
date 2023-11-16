@@ -3,9 +3,11 @@ import { useSelector } from "react-redux";
 
 const RelatedDesCard = ({ data }) => {
   const { lngMode } = useSelector((state) => state.lngMode);
-  // console.log(data);
+  console.log(data);
+
+
   return (
-    <div className="col-lg-4 col-md-6 col-sm-6 mb-4 slide w-100">
+    <div  className="col-lg-4 col-md-6 col-sm-6 mb-4 slide w-100">
       <div className="trend-item1">
         <div className="trend-image position-relative rounded">
           <img src="/images/destination/destination17.jpg" alt="image" />

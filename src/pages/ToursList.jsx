@@ -330,7 +330,7 @@ const ToursList = () => {
       {/* <!-- Discount action Ends --> */}
 
       {/* <!-- partner starts --> */}
-      <OurPartners />
+      {/* <OurPartners /> */}
       {/* <!-- partner ends --> */}
     </div>
   );

@@ -57,22 +57,22 @@ const Footer = () => {
             <div className="col-lg-4 col-md-6 col-sm-12 mb-4 pe-4">
               <div className="footer-about">
                 <img src="/trslogo.png" alt="" style={{ width: "100px" }}/>
-                <p className="mt-3 mb-3 white">
+                <p className="mt-3 mb-3">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Odio
                   suspendisse leo neque iaculis molestie sagittis maecenas
                   aenean eget molestie sagittis.
                 </p>
                 <ul>
-                  <li className="white">
+                  <li className="">
                     <strong>PO Box:</strong> +47-252-254-2542
                   </li>
-                  <li className="white">
+                  <li className="">
                     <strong>Location:</strong> Collins Street, sydney, Australia
                   </li>
-                  <li className="white">
+                  <li className="">
                     <strong>Email:</strong> info@Travelin.com
                   </li>
-                  <li className="white">
+                  <li className="">
                     <strong>Website:</strong> www.Travelin.com
                   </li>
                 </ul>
@@ -80,7 +80,7 @@ const Footer = () => {
             </div>
             <div className="col-lg-2 col-md-6 col-sm-12 mb-4">
               <div className="footer-links">
-                <h3 className="white">Quick link</h3>
+                <h3 className="">Quick link</h3>
                 <ul>
                   <li>
                     <a href="about-us.html">About Us</a>
@@ -105,7 +105,7 @@ const Footer = () => {
             </div>
             <div className="col-lg-2 col-md-6 col-sm-12 mb-4">
               <div className="footer-links">
-                <h3 className="white">Categories</h3>
+                <h3 className="">Categories</h3>
                 <ul>
                   <li>
                     <a href="about-us.html">Travel</a>
@@ -130,23 +130,7 @@ const Footer = () => {
             </div>
             <div className="col-lg-4 col-md-6 col-sm-12 mb-4">
               <div className="footer-links">
-                <h3 className="white">Newsletter</h3>
-                <div className="newsletter-form ">
-                  <p className="mb-3">
-                    Jin our community of over 200,000 global readers who
-                    receives emails filled with news, promotions, and other good
-                    stuff.
-                  </p>
-                  <form
-                    action="#"
-                    method="get"
-                    acceptCharset="utf-8"
-                    className="border-0 d-flex align-items-center"
-                  >
-                    <input type="text" placeholder="Email Address" />
-                    <button className="nir-btn ms-2">Subscribe</button>
-                  </form>
-                </div>
+              
               </div>
             </div>
           </div>
@@ -177,26 +161,7 @@ const Footer = () => {
               </ul>
             </div>
             <div className="col-lg-4 footer-payment-nav mb-4">
-              <ul className="d-flex align-items-center">
-                <li className="me-2 w-75">
-                  <select className="niceSelect rounded">
-                    <option>English</option>
-                    <option>Chinese</option>
-                    <option>Russian</option>
-                    <option>Japanese</option>
-                    <option>Korean</option>
-                  </select>
-                </li>
-                <li className="w-25">
-                  <select className="niceSelect rounded">
-                    <option>$ USD</option>
-                    <option>$ AUD</option>
-                    <option>$ YEN</option>
-                    <option>$ IN</option>
-                    <option>$ NP</option>
-                  </select>
-                </li>
-              </ul>
+       
             </div>
           </div>
         </div>
@@ -206,7 +171,7 @@ const Footer = () => {
         <div className="container">
           <div className="copyright-inner rounded p-3 d-md-flex align-items-center justify-content-between">
             <div className="copyright-text">
-              <p className="m-0 white">2022 Travelin. All rights reserved.</p>
+              <p className="m-0">2022 Travelin. All rights reserved.</p>
             </div>
             <div className="social-links">
               <ul>
