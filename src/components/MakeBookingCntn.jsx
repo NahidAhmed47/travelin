@@ -12,7 +12,6 @@ import { useAddCartMutation } from "../redux/api/apiSlice";
 
 const MakeBookingCntn = ({ tour }) => {
   const { lngMode } = useSelector((state) => state.lngMode);
-  console.log(tour);
   const [date, onChangeDate] = useState(new Date());
   const token = Cookies.get("access_token_web_tours");
   const [guest, setGuest] = useState(1);
@@ -212,7 +211,7 @@ const MakeBookingCntn = ({ tour }) => {
 
           <div className="sidebar-item">
             <h3>Related Destinations</h3>
-            <RelatedDesContainer relatedDestination={[1, 2]} />
+            <RelatedDesContainer />
           </div>
         </div>
       </div>

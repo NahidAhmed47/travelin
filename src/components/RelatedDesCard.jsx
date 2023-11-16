@@ -3,7 +3,6 @@ import { useSelector } from "react-redux";
 
 const RelatedDesCard = ({ data, getToursByCity }) => {
   const { lngMode } = useSelector((state) => state.lngMode);
-  console.log(data);
   const handleClick = () => {
     getToursByCity(data?.id);
   };
