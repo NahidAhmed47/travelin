@@ -4,7 +4,6 @@ import TourGridCard from "../components/TourGridCard";
 import durationType from "../fake-data/durationType";
 import TourListCard from "../components/TourListCard";
 import ExploreYourLife from "../components/common/ExploreYourLife";
-import OurPartners from "../components/common/OurPartners";
 import {
   useGetAllTourListQuery,
   useGetCategoriesQuery,
@@ -25,6 +24,7 @@ import ReactSlider from "react-slider";
 const ToursList = () => {
   const [listViewOpen, setListViewOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(false);
+  const [toursList, setToursList] = useState([]);
   const { lngMode } = useSelector((state) => state.lngMode);
   const [title, setTitle] = useState(lngMode == "en" ? "Sort By" : "ترتيب حسب");
   const dispatch = useDispatch();
@@ -54,8 +54,10 @@ const ToursList = () => {
     lngMode,
     refetch,
   ]);
+  useEffect(() => {
+    setToursList(data?.data);
+  }, [data]);
   if (isLoading) return <Loader />;
-  const toursList = data?.data;
   // handle sort filter
   const categories = categoriesData?.data;
   const handleSortFilter = (value) => {
@@ -95,6 +97,15 @@ const ToursList = () => {
   const handleSliderChange = (values) => {
     dispatch(setMinPrice(values[0]));
     dispatch(setMaxPrice(values[1]));
+  };
+  const getToursByCity = async (cityId) => {
+    const res = await fetch(
+      `https://jwlatadmin.com/api/tours/tours-by-city/${cityId}`
+    );
+    const data = await res.json();
+    if (data?.success) {
+      setToursList(data?.data);
+    }
   };
   return (
     <div>
@@ -315,6 +326,7 @@ const ToursList = () => {
                     </h3>
                     <RelatedDesContainer
                       relatedDestination={data?.related_cities}
+                      getToursByCity={getToursByCity}
                     />
                   </div>
                 </div>

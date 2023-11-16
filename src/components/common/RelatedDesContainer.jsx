@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import RelatedDesCard from "../RelatedDesCard";
 
-const RelatedDesContainer = ({ relatedDestination = [] }) => {
+const RelatedDesContainer = ({ relatedDestination = [], getToursByCity }) => {
   const delay = 2500;
   const [index, setIndex] = useState(0);
   const timeoutRef = useRef(null);
@@ -33,7 +33,7 @@ const RelatedDesContainer = ({ relatedDestination = [] }) => {
         style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
       >
         {relatedDestination?.map((data, index) => (
-          <RelatedDesCard key={index} data={data} />
+          <RelatedDesCard key={index} data={data} getToursByCity={getToursByCity}/>
         ))}
       </div>
     </div>

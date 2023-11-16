@@ -1,13 +1,18 @@
 import React from "react";
 import { useSelector } from "react-redux";
 
-const RelatedDesCard = ({ data }) => {
+const RelatedDesCard = ({ data, getToursByCity }) => {
   const { lngMode } = useSelector((state) => state.lngMode);
   console.log(data);
-
-
+  const handleClick = () => {
+    getToursByCity(data?.id);
+  };
   return (
-    <div  className="col-lg-4 col-md-6 col-sm-6 mb-4 slide w-100">
+    <div
+      onClick={handleClick}
+      className="col-lg-4 col-md-6 col-sm-6 mb-4 slide w-100"
+      style={{ cursor: "pointer" }}
+    >
       <div className="trend-item1">
         <div className="trend-image position-relative rounded">
           <img src="/images/destination/destination17.jpg" alt="image" />
