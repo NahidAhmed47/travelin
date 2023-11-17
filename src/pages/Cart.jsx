@@ -45,18 +45,18 @@ const Cart = () => {
                         <th>Order Number</th>
                         <th>Tour</th>
                         <th>Date</th>
-                        <th>Guest</th>
-                        {/* <th>Total Amount</th> */}
+                        <th>Guests</th>
+                        <th>Total Amount</th>
                       </thead>
                       <tbody>
                         {carts?.map((cart, index) => (
                           <tr key={cart?.id}>
                             <td className="theme2">{index + 1}</td>
                             <td className="theme2">{cart?.id}</td>
-                            <td className="theme2">{cart?.date}</td>
                             <td className="theme2">{cart?.tour?.title}</td>
+                            <td className="theme2">{cart?.date}</td>
                             <td className="theme2">{cart?.guests_no}</td>
-                            {/* <td className="theme2">Bank Transfer</td> */}
+                            <td className="theme2">${cart?.tour?.price * cart?.guests_no}</td>
                           </tr>
                         ))}
                       </tbody>
