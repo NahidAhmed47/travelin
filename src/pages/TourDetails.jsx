@@ -9,6 +9,7 @@ import { useParams } from "react-router-dom";
 import { useGetSingleTourQuery } from "../redux/api/apiSlice";
 import Loader from "../components/global/Loader";
 import { useSelector } from "react-redux";
+import TourDetailsBanner from "../components/TourDetailsBanner";
 
 const TourDetails = () => {
   const tourId = useParams()?.id;
@@ -16,7 +17,7 @@ const TourDetails = () => {
   const { lngMode } = useSelector((state) => state.lngMode);
   if (isLoading) return <Loader />;
   const tour = data?.data;
-  const { description = "", id, title, duration, max_guests_no } = tour;
+  const { description = "", id, title, duration, max_guests_no, images } = tour;
   return (
     <div>
       <section
@@ -50,71 +51,38 @@ const TourDetails = () => {
                       </div>
                     </div>
                   </div>
-                  <div className=" mb-4 overflow-hidden rounded">
+                  {/* <div className=" mb-4 overflow-hidden rounded">
                     <div className=" position-relative">
                       <div className="  overflow-hidden rounded">
                         <div>
                           <img
-                            src="/images/trending/trending1.jpg"
+                            src={images[0]}
                             alt="1"
                             style={{ width: "100%", height: "100%" }}
                           />
                         </div>
                       </div>
                       <div className="single-tour-img-slider rounded overflow-hidden">
-                        <div className="single-tour-img-single-div">
+                        {
+                          images.map((image, index) => {
+                            return (
+                              <>
+                              <div className="single-tour-img-single-div">
                           <img
-                            src="/images/trending/trending1.jpg"
+                            src={image}
                             alt="1"
                             className="rounded"
                           />
                         </div>
-                        <div className="single-tour-img-single-div">
-                          <img
-                            src="/images/trending/trending2.jpg"
-                            alt="1"
-                            className="rounded"
-                          />
-                        </div>
-                        <div className="single-tour-img-single-div">
-                          <img
-                            src="/images/trending/trending3.jpg"
-                            alt="1"
-                            className="rounded"
-                          />
-                        </div>
-                        <div>
-                          <img
-                            src="/images/trending/trending5.jpg"
-                            alt="1"
-                            className="rounded"
-                          />
-                        </div>
-                        <div>
-                          <img
-                            src="/images/trending/trending6.jpg"
-                            alt="1"
-                            className="rounded"
-                          />
-                        </div>
-                        <div>
-                          <img
-                            src="/images/trending/trending7.jpg"
-                            alt="1"
-                            className="rounded"
-                          />
-                        </div>
-                        <div>
-                          <img
-                            src="/images/trending/trending7.jpg"
-                            alt="1"
-                            className="rounded"
-                          />
-                        </div>
+                              </>
+                            )
+                          })
+                        }
+                        
                       </div>
                     </div>
-                  </div>
-
+                  </div> */}
+                  <TourDetailsBanner images={tour?.images}/>
                   <div className="description mb-2">
                     <h4>{lngMode == "en" ? "Description" : "وصف"}</h4>
                     <div
@@ -452,7 +420,7 @@ const TourDetails = () => {
         {/* <!-- Discount action starts --> */}
         <ExploreYourLife />
         {/* <!-- Discount action Ends --> */}
-        <OurPartners />
+    
       </div>
     </div>
   );

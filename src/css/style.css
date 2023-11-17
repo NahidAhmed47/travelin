@@ -8350,6 +8350,37 @@ ul.sidebar-tags li a:hover {
   border-radius: 50%;
 }
 
+.single-tour-img-slider {
+  display: flex;
+  margin-top: 20px;
+  gap: 10px;
+  height: fit-content;
+  width: 100%;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.single-tour-img-slider::-webkit-scrollbar {
+  display: none;
+}
+
+.single-tour-img-slider-item {
+  width: 150px;
+  height: 100%;
+  flex-shrink: 0;
+}
+
+.cursor-grabbing {
+  cursor: grabbing;
+}
+
+/* Smooth scrolling transition */
+.scroll-smooth {
+  transition: 0.5s ease-in-out;
+  -webkit-transition: -webkit-scroll-behavior 0.5s ease-in-out;
+  /* For Webkit browsers */
+}
+
 @media (max-width: 991px) {
   .blog-sidebar {
     margin-top: 2rem;

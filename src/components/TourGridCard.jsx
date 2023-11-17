@@ -19,7 +19,7 @@ const TourGridCard = ({ tour }) => {
       <div className="trend-item rounded box-shadow">
         <div className="trend-image position-relative">
           <img
-            src={"/images/trending/trending2.jpg"}
+            src={images[0]}
             alt="image"
             className=""
           />
