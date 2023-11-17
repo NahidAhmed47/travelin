@@ -8,12 +8,13 @@ import DatePicker from "react-date-picker";
 import "react-date-picker/dist/DatePicker.css";
 import "react-calendar/dist/Calendar.css";
 import { format } from "date-fns";
-import { useAddCartMutation } from "../redux/api/apiSlice";
+import { useAddCartMutation, useGetAllCartsQuery } from "../redux/api/apiSlice";
 
 const MakeBookingCntn = ({ tour }) => {
   const { lngMode } = useSelector((state) => state.lngMode);
   const [date, onChangeDate] = useState(new Date());
   const token = Cookies.get("access_token_web_tours");
+  const { refetch } = useGetAllCartsQuery({ token });
   const [guest, setGuest] = useState(1);
   const { user } = useSelector((state) => state.user);
   const [addCart, { error }] = useAddCartMutation();
@@ -47,6 +48,7 @@ const MakeBookingCntn = ({ tour }) => {
     };
     const res = await addCart({ data: cart, token });
     if (res?.data?.success === true) {
+      refetch();
       Swal.fire({
         title: "Success!",
         text: "Booking added to cart!",

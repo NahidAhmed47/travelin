@@ -74,8 +74,17 @@ const api = createApi({
                 body: data,
             }),
         }),
+        getAllCarts: builder.query({
+            query: ({ token }) => ({
+                url: '/api/carts/list',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            }),
+        }),
     })
 })
 
-export const { useGetToursQuery, useGetAllCountryQuery, useGetCitiesByCountryQuery, useGetAllTourListQuery, useGetSingleTourQuery, useGetCategoriesQuery, useCreateUserMutation, useUserLogInMutation, useAddCartMutation } = api;
+export const { useGetToursQuery, useGetAllCountryQuery, useGetCitiesByCountryQuery, useGetAllTourListQuery,
+    useGetAllCartsQuery, useGetSingleTourQuery, useGetCategoriesQuery, useCreateUserMutation, useUserLogInMutation, useAddCartMutation } = api;
 export default api;
