@@ -68,7 +68,8 @@ const api = createApi({
                 url: '/api/carts/add',
                 method: 'POST',
                 headers: {
-                    Authorization: `${token}`,
+                    Authorization: `Bearer ${token}`,
+                    Accept: "application/json",
                 },
                 body: data,
             }),
