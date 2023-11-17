@@ -37,8 +37,8 @@ const Cart = () => {
           <div className="row">
             <div className="w-100 mb-4">
               <div className="payment-book">
-                <div className="booking-box">
-                  <div className="travellers-info mb-4">
+                <div className="booking-box" style={{overflow: "auto"}}>
+                  <div className="travellers-info mb-4" style={{minWidth: "600px"}}>
                     <table>
                       <thead>
                         <th>No.</th>
